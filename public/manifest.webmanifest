@@ -1,0 +1,16 @@
+{
+  "name": "Физика",
+  "short_name": "Физика",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f2f3f0",
+  "theme_color": "#1f4fd8",
+  "icons": [
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
