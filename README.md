@@ -20,6 +20,12 @@ npm run build
 npx playwright test
 ```
 
+## Публикация
+
+Сайт собирается workflow `.github/workflows/deploy.yml` при пуше в `feat/mvp`.
+В настройках репозитория: Settings → Pages → Source: GitHub Actions.
+Адрес: https://dmitrukn.github.io/fizika/
+
 ## Документы
 
 - Спека: `docs/specs/0001-molecular-physics.md`
