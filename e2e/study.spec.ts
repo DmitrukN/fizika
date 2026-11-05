@@ -1,16 +1,21 @@
 import { expect, test } from '@playwright/test';
 
-test('сессия: возврат забытой карточки, итог и прогресс', async ({ page }) => {
+test('сессия: обозначения, возврат забытой карточки, итог и прогресс', async ({
+  page,
+}) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { name: 'Физика' })).toBeVisible();
 
-  await page.getByRole('button', { name: /Все разделы/ }).click();
+  await page.getByRole('button', { name: /Молекулярная физика/ }).click();
 
   const card = page.locator('.card__hit');
   const title = await card.locator('.card__title').innerText();
 
   await card.click();
   await expect(page.locator('.formula .katex')).toBeVisible();
+  await expect(page.locator('.notation dt').first()).toBeVisible();
+  await expect(page.locator('.notation dd').first()).not.toBeEmpty();
+
   await page.getByRole('button', { name: 'Забыл' }).click();
 
   for (let index = 0; index < 3; index += 1) {
@@ -37,19 +42,17 @@ test('сессия: возврат забытой карточки, итог и 
 
 test('ответы переживают перезагрузку', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: /Модель идеального газа/ }).click();
+  await page.getByRole('button', { name: /Молекулярная физика/ }).click();
 
   await page.locator('.card__hit').click();
   await page.getByRole('button', { name: 'Знаю' }).click();
 
-  const stored = await page.evaluate(() =>
-    localStorage.getItem('fizika.v1'),
-  );
+  const stored = await page.evaluate(() => localStorage.getItem('fizika.v2'));
   expect(stored).not.toBeNull();
 
   await page.reload();
   await expect(page.getByRole('heading', { name: 'Физика' })).toBeVisible();
-  await expect(page.getByRole('button', { name: /Продолжить/ })).toBeVisible();
+  await expect(page.locator('.section-row__count')).toHaveText('33 из 34');
 });
 
 test('на 402 × 874 нет прокрутки', async ({ page }) => {
@@ -67,13 +70,13 @@ test('на 402 × 874 нет прокрутки', async ({ page }) => {
 
   expect(await fits()).toBe(true);
 
-  await page.getByRole('button', { name: /Все разделы/ }).click();
+  await page.getByRole('button', { name: /Молекулярная физика/ }).click();
   expect(await fits()).toBe(true);
 });
 
 test('битые данные показывают ошибку и сброс', async ({ page }) => {
   await page.addInitScript(() => {
-    localStorage.setItem('fizika.v1', '{не json');
+    localStorage.setItem('fizika.v2', '{не json');
   });
   await page.goto('/');
 

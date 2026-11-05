@@ -1,9 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { CARDS } from '../content/cards';
+import { ALL_CARDS, SECTIONS } from '../content/sections';
 import { NEW_CARD } from './scheduler';
 import {
   accuracy,
-  deckStats,
   dueCards,
   formatPercent,
   progressOf,
@@ -16,7 +15,7 @@ function storeWith(cards: Store['cards']): Store {
   return { ...emptyStore(), cards };
 }
 
-describe('статистика колоды', () => {
+describe('статистика раздела', () => {
   it('делит карточки на закреплённые, в работе и нетронутые', () => {
     const store = storeWith({
       amount: { ...NEW_CARD, interval: 7 },
@@ -24,7 +23,8 @@ describe('статистика колоды', () => {
       density: { ...NEW_CARD, interval: 0 },
     });
 
-    expect(deckStats(CARDS, store)).toEqual({
+    expect(sectionStats(SECTIONS[0], store)).toEqual({
+      title: 'Молекулярная физика',
       locked: 1,
       learning: 1,
       untouched: 32,
@@ -32,18 +32,11 @@ describe('статистика колоды', () => {
     });
   });
 
-  it('считает раздел отдельно', () => {
-    const store = storeWith({ amount: { ...NEW_CARD, interval: 7 } });
-    const stats = sectionStats(CARDS, store, 'model');
-    expect(stats.title).toBe('Модель идеального газа');
-    expect(stats).toMatchObject({ locked: 1, total: 5 });
-  });
-
   it('показывает созревшие карточки, включая новые', () => {
     const store = storeWith({
       amount: { ...NEW_CARD, interval: 5, due: '2026-12-01' },
     });
-    expect(dueCards(CARDS, store, '2026-11-05')).toHaveLength(33);
+    expect(dueCards(ALL_CARDS, store, '2026-11-05')).toHaveLength(33);
   });
 
   it('считает точность по всем ответам и по последней сессии', () => {
@@ -57,7 +50,7 @@ describe('статистика колоды', () => {
         {
           startedAt: 1,
           endedAt: 2,
-          section: 'all',
+          section: 'molecular',
           answered: 4,
           know: 3,
           forgot: 1,

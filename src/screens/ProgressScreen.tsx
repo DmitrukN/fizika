@@ -1,9 +1,7 @@
-import { CARDS } from '../content/cards';
 import { SECTIONS } from '../content/sections';
 import { formatDateTimeShort, formatDay, type Day } from '../domain/date';
 import {
   accuracy,
-  deckStats,
   formatPercent,
   lastSessionOf,
   sectionStats,
@@ -18,7 +16,16 @@ interface ProgressScreenProps {
 }
 
 export function ProgressScreen({ store, day, onBack }: ProgressScreenProps) {
-  const deck = deckStats(CARDS, store);
+  const rows = SECTIONS.map((section) => sectionStats(section, store));
+  const totals = rows.reduce(
+    (sum, row) => ({
+      locked: sum.locked + row.locked,
+      learning: sum.learning + row.learning,
+      untouched: sum.untouched + row.untouched,
+    }),
+    { locked: 0, learning: 0, untouched: 0 },
+  );
+
   const scores = accuracy(store);
   const last = lastSessionOf(store);
   const days = studyDays(store, day);
@@ -32,17 +39,17 @@ export function ProgressScreen({ store, day, onBack }: ProgressScreenProps) {
         </button>
       </header>
 
-      <section className="summary" aria-label="Сводка по колоде">
+      <section className="summary" aria-label="Сводка">
         <div>
-          <div className="summary__value">{deck.locked}</div>
+          <div className="summary__value">{totals.locked}</div>
           <div className="summary__label">закреплено</div>
         </div>
         <div>
-          <div className="summary__value">{deck.learning}</div>
+          <div className="summary__value">{totals.learning}</div>
           <div className="summary__label">в работе</div>
         </div>
         <div>
-          <div className="summary__value">{deck.untouched}</div>
+          <div className="summary__value">{totals.untouched}</div>
           <div className="summary__label">не начато</div>
         </div>
       </section>
@@ -53,16 +60,15 @@ export function ProgressScreen({ store, day, onBack }: ProgressScreenProps) {
       </div>
 
       <section aria-label="Разделы">
-        {SECTIONS.map((section) => {
-          const stats = sectionStats(CARDS, store, section.id);
-          const width = stats.total === 0 ? 0 : (stats.locked / stats.total) * 100;
+        {rows.map((row) => {
+          const width = row.total === 0 ? 0 : (row.locked / row.total) * 100;
 
           return (
-            <div className="section-stat" key={section.id}>
+            <div className="section-stat" key={row.title}>
               <div className="section-stat__row">
-                <span>{stats.title}</span>
+                <span>{row.title}</span>
                 <span className="section-stat__count">
-                  {stats.locked} из {stats.total}
+                  {row.locked} из {row.total}
                 </span>
               </div>
               <div className="bar" aria-hidden="true">

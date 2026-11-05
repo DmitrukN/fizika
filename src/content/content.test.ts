@@ -1,53 +1,41 @@
 import { describe, expect, it } from 'vitest';
 import katex from 'katex';
-import { CARDS } from './cards';
-import { SECTIONS } from './sections';
+import { ALL_CARDS, SECTIONS } from './sections';
 
-describe('содержимое колоды', () => {
+describe('содержимое разделов', () => {
   it('содержит 34 карточки', () => {
-    expect(CARDS).toHaveLength(34);
+    expect(ALL_CARDS).toHaveLength(34);
   });
 
   it('не повторяет идентификаторы', () => {
-    const ids = new Set(CARDS.map((card) => card.id));
-    expect(ids.size).toBe(CARDS.length);
+    const ids = new Set(ALL_CARDS.map((card) => card.id));
+    expect(ids.size).toBe(ALL_CARDS.length);
   });
 
-  it('ссылается только на существующие разделы', () => {
-    const sectionIds = new Set(SECTIONS.map((section) => section.id));
-    for (const card of CARDS) {
-      expect(sectionIds.has(card.section), card.id).toBe(true);
+  it('не оставляет пустых разделов', () => {
+    for (const section of SECTIONS) {
+      expect(section.cards.length, section.id).toBeGreaterThan(0);
     }
   });
 
-  it('заполняет название и формулу', () => {
-    for (const card of CARDS) {
+  it('заполняет название, формулу и обозначения', () => {
+    for (const card of ALL_CARDS) {
       expect(card.title.trim(), card.id).not.toBe('');
       expect(card.formula.trim(), card.id).not.toBe('');
+      expect(card.notation.length, card.id).toBeGreaterThanOrEqual(2);
+
+      const symbols = card.notation.map((item) => item.symbol);
+      expect(new Set(symbols).size, card.id).toBe(symbols.length);
+
+      for (const item of card.notation) {
+        expect(item.symbol.trim(), card.id).not.toBe('');
+        expect(item.text.trim(), card.id).not.toBe('');
+      }
     }
-  });
-
-  it('раскладывает карточки по разделам без пустых', () => {
-    const counts = Object.fromEntries(
-      SECTIONS.map((section) => [
-        section.id,
-        CARDS.filter((card) => card.section === section.id).length,
-      ]),
-    );
-
-    expect(counts).toEqual({
-      model: 5,
-      mkt: 6,
-      temperature: 4,
-      state: 4,
-      isoprocess: 3,
-      thermo: 10,
-      vapor: 2,
-    });
   });
 
   it('рисует каждую формулу через KaTeX', () => {
-    for (const card of CARDS) {
+    for (const card of ALL_CARDS) {
       expect(
         () =>
           katex.renderToString(card.formula, {
@@ -56,6 +44,21 @@ describe('содержимое колоды', () => {
           }),
         card.id,
       ).not.toThrow();
+    }
+  });
+
+  it('рисует каждый символ обозначения через KaTeX', () => {
+    for (const card of ALL_CARDS) {
+      for (const item of card.notation) {
+        expect(
+          () =>
+            katex.renderToString(item.symbol, {
+              throwOnError: true,
+              displayMode: false,
+            }),
+          `${card.id}: ${item.symbol}`,
+        ).not.toThrow();
+      }
     }
   });
 });

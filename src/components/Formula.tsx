@@ -1,34 +1,47 @@
 import katex from 'katex';
 
-interface FormulaProps {
+interface TexProps {
   latex: string;
+  display?: boolean;
 }
 
-export function Formula({ latex }: FormulaProps) {
+function render(latex: string, display: boolean): string {
+  return katex.renderToString(latex, {
+    throwOnError: true,
+    displayMode: display,
+  });
+}
+
+export function Tex({ latex, display = false }: TexProps) {
   let html: string | null = null;
   let error = '';
 
   try {
-    html = katex.renderToString(latex, {
-      throwOnError: true,
-      displayMode: true,
-    });
+    html = render(latex, display);
   } catch (cause) {
     error = cause instanceof Error ? cause.message : String(cause);
   }
 
   if (html === null) {
     return (
-      <p className="formula-error" role="alert">
-        Не удалось нарисовать формулу. {error}
-      </p>
+      <span className="formula-error" role="alert" title={error}>
+        ошибка в формуле
+      </span>
     );
   }
 
   return (
-    <div
-      className="formula"
+    <span
+      className={display ? 'formula' : 'tex-inline'}
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );
+}
+
+export function Formula({ latex }: { latex: string }) {
+  return <Tex latex={latex} display />;
+}
+
+export function InlineFormula({ latex }: { latex: string }) {
+  return <Tex latex={latex} />;
 }

@@ -3,10 +3,12 @@ import { NEW_CARD } from '../domain/scheduler';
 import {
   clear,
   emptyStore,
+  LEGACY_KEY,
   load,
   markDay,
   save,
   STORAGE_KEY,
+  STORE_VERSION,
   type Store,
 } from './store';
 
@@ -36,7 +38,6 @@ describe('хранилище', () => {
       ...emptyStore(),
       cards: { amount: { ...NEW_CARD, interval: 5, due: '2026-11-10' } },
       days: ['2026-11-05'],
-      lastSection: 'mkt',
     };
 
     save(storage, store);
@@ -46,8 +47,60 @@ describe('хранилище', () => {
     if (result.ok) expect(result.store).toEqual(store);
   });
 
+  it('переносит прогресс из первой версии', () => {
+    const legacy = {
+      version: 1,
+      cards: { amount: { ...NEW_CARD, interval: 7, due: '2026-11-12' } },
+      sessions: [
+        {
+          startedAt: 1,
+          endedAt: 2,
+          section: 'model',
+          answered: 3,
+          know: 2,
+          forgot: 1,
+        },
+      ],
+      days: ['2026-11-05'],
+      lastSection: 'model',
+    };
+
+    const result = load(
+      fakeStorage({ [LEGACY_KEY]: JSON.stringify(legacy) }),
+    );
+
+    expect(result.ok).toBe(true);
+    if (!result.ok) return;
+
+    expect(result.store.version).toBe(STORE_VERSION);
+    expect(result.store.cards).toEqual(legacy.cards);
+    expect(result.store.days).toEqual(legacy.days);
+    expect(result.store.sessions[0].section).toBe('molecular');
+    expect(result.store.sessions[0].know).toBe(2);
+  });
+
+  it('предпочитает новую версию старой', () => {
+    const storage = fakeStorage({
+      [STORAGE_KEY]: JSON.stringify(emptyStore()),
+      [LEGACY_KEY]: JSON.stringify({ version: 1, broken: true }),
+    });
+
+    const result = load(storage);
+    expect(result.ok).toBe(true);
+  });
+
   it('сообщает о битом JSON', () => {
     const result = load(fakeStorage({ [STORAGE_KEY]: '{не json' }));
+    expect(result.ok).toBe(false);
+  });
+
+  it('не откатывается на старую версию, если новая повреждена', () => {
+    const storage = fakeStorage({
+      [STORAGE_KEY]: '{не json',
+      [LEGACY_KEY]: JSON.stringify({ version: 1 }),
+    });
+
+    const result = load(storage);
     expect(result.ok).toBe(false);
   });
 
@@ -63,11 +116,10 @@ describe('хранилище', () => {
     const result = load(
       fakeStorage({
         [STORAGE_KEY]: JSON.stringify({
-          version: 1,
+          version: 2,
           cards: { amount: { interval: 4 } },
           sessions: [],
           days: [],
-          lastSection: 'all',
         }),
       }),
     );
@@ -80,9 +132,13 @@ describe('хранилище', () => {
     expect(twice.days).toEqual(['2026-11-05']);
   });
 
-  it('очищает ключ', () => {
-    const storage = fakeStorage({ [STORAGE_KEY]: '{}' });
+  it('очищает оба ключа', () => {
+    const storage = fakeStorage({
+      [STORAGE_KEY]: '{}',
+      [LEGACY_KEY]: '{}',
+    });
     clear(storage);
     expect(storage.getItem(STORAGE_KEY)).toBeNull();
+    expect(storage.getItem(LEGACY_KEY)).toBeNull();
   });
 });

@@ -1,6 +1,11 @@
 import { useState, type ReactNode } from 'react';
-import { CARDS, type Card } from './content/cards';
-import { sectionTitle } from './content/sections';
+import {
+  SECTIONS,
+  sectionById,
+  sectionTitle,
+  type Card,
+  type SectionId,
+} from './content/sections';
 import { today } from './domain/date';
 import {
   applyAnswer,
@@ -16,7 +21,6 @@ import {
   markDay,
   save,
   type LoadResult,
-  type SectionChoice,
   type SessionRecord,
   type Store,
 } from './storage/store';
@@ -30,7 +34,7 @@ import { SummaryScreen } from './screens/SummaryScreen';
 type Screen = 'start' | 'session' | 'summary' | 'progress' | 'empty' | 'error';
 
 interface SessionState {
-  section: SectionChoice;
+  section: SectionId;
   queue: Card[];
   revealed: boolean;
   startedAt: number;
@@ -47,10 +51,6 @@ function shuffle<T>(items: T[]): T[] {
     [copy[index], copy[swap]] = [copy[swap], copy[index]];
   }
   return copy;
-}
-
-function deckLabel(section: SectionChoice): string {
-  return section === 'all' ? 'Все разделы' : sectionTitle(section);
 }
 
 function readStore(): LoadResult {
@@ -76,7 +76,9 @@ export function App() {
     initial.ok ? 'start' : 'error',
   );
   const [session, setSession] = useState<SessionState | null>(null);
-  const [emptySection, setEmptySection] = useState<SectionChoice>('all');
+  const [emptySection, setEmptySection] = useState<SectionId>(
+    SECTIONS[0].id,
+  );
   const [result, setResult] = useState<SessionRecord | null>(null);
   const [saveError, setSaveError] = useState<string | null>(null);
 
@@ -95,37 +97,33 @@ export function App() {
     }
   }
 
-  function startSession(section: SectionChoice, repeatAll = false) {
+  function startSession(sectionId: SectionId, repeatAll = false) {
     if (!store) return;
 
-    const pool = CARDS.filter(
-      (card) => section === 'all' || card.section === section,
-    );
+    const section = sectionById(sectionId);
     const due = repeatAll
-      ? pool
-      : pool.filter((card) => isDue(progressOf(store, card.id), day));
+      ? section.cards
+      : section.cards.filter((card) =>
+          isDue(progressOf(store, card.id), day),
+        );
 
     if (due.length === 0) {
-      setEmptySection(section);
+      setEmptySection(sectionId);
       setScreen('empty');
       return;
     }
 
     setSession({
-      section,
+      section: sectionId,
       queue: shuffle(due),
       revealed: false,
       startedAt: Date.now(),
       answeredIds: [],
       know: 0,
       forgot: 0,
-      total: pool.length,
+      total: section.cards.length,
     });
     setScreen('session');
-
-    if (store.lastSection !== section) {
-      persist({ ...store, lastSection: section });
-    }
   }
 
   function reveal() {
@@ -249,7 +247,7 @@ export function App() {
       if (session && session.queue.length > 0) {
         content = (
           <SessionScreen
-            sectionTitle={deckLabel(session.section)}
+            sectionTitle={sectionTitle(session.section)}
             card={session.queue[0]}
             revealed={session.revealed}
             answered={session.answeredIds.length}
@@ -285,7 +283,7 @@ export function App() {
     case 'empty':
       content = (
         <EmptyScreen
-          sectionTitle={deckLabel(emptySection)}
+          sectionTitle={sectionTitle(emptySection)}
           onRepeatAll={() => startSession(emptySection, true)}
           onHome={() => setScreen('start')}
         />

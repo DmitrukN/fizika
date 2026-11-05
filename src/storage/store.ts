@@ -2,15 +2,14 @@ import type { Day } from '../domain/date';
 import { INTERVALS, type CardProgress, type Interval } from '../domain/scheduler';
 import { SECTIONS, type SectionId } from '../content/sections';
 
-export const STORAGE_KEY = 'fizika.v1';
-export const STORE_VERSION = 1;
-
-export type SectionChoice = SectionId | 'all';
+export const STORAGE_KEY = 'fizika.v2';
+export const LEGACY_KEY = 'fizika.v1';
+export const STORE_VERSION = 2;
 
 export interface SessionRecord {
   startedAt: number;
   endedAt: number;
-  section: SectionChoice;
+  section: SectionId;
   answered: number;
   know: number;
   forgot: number;
@@ -21,7 +20,6 @@ export interface Store {
   cards: Record<string, CardProgress>;
   sessions: SessionRecord[];
   days: Day[];
-  lastSection: SectionChoice;
 }
 
 export type LoadResult =
@@ -34,7 +32,6 @@ export function emptyStore(): Store {
     cards: {},
     sessions: [],
     days: [],
-    lastSection: 'all',
   };
 }
 
@@ -57,47 +54,76 @@ function isProgress(value: unknown): value is CardProgress {
   );
 }
 
+function isKnownSection(value: unknown): value is SectionId {
+  return SECTIONS.some((section) => section.id === value);
+}
+
 function isSession(value: unknown): value is SessionRecord {
   if (!isRecord(value)) return false;
   return (
     typeof value.startedAt === 'number' &&
     typeof value.endedAt === 'number' &&
-    (value.section === 'all' || SECTIONS.some((item) => item.id === value.section)) &&
+    isKnownSection(value.section) &&
     typeof value.answered === 'number' &&
     typeof value.know === 'number' &&
     typeof value.forgot === 'number'
   );
 }
 
+function isCards(value: unknown): value is Record<string, CardProgress> {
+  return isRecord(value) && Object.values(value).every(isProgress);
+}
+
+function isDays(value: unknown): value is Day[] {
+  return Array.isArray(value) && value.every((day) => typeof day === 'string');
+}
+
 function isStore(value: unknown): value is Store {
   if (!isRecord(value)) return false;
   if (value.version !== STORE_VERSION) return false;
-  if (!isRecord(value.cards)) return false;
-  if (!Object.values(value.cards).every(isProgress)) return false;
+  if (!isCards(value.cards)) return false;
   if (!Array.isArray(value.sessions) || !value.sessions.every(isSession)) {
     return false;
   }
-  if (
-    !Array.isArray(value.days) ||
-    !value.days.every((day) => typeof day === 'string')
-  ) {
-    return false;
-  }
-  if (
-    value.lastSection !== 'all' &&
-    !SECTIONS.some((item) => item.id === value.lastSection)
-  ) {
-    return false;
-  }
-  return true;
+  return isDays(value.days);
 }
 
-export function load(storage: Pick<Storage, 'getItem'>): LoadResult {
-  const raw = storage.getItem(STORAGE_KEY);
-  if (raw === null) {
-    return { ok: true, store: emptyStore() };
-  }
+interface LegacySession {
+  startedAt: number;
+  endedAt: number;
+  answered: number;
+  know: number;
+  forgot: number;
+}
 
+interface LegacyStore {
+  cards: Record<string, CardProgress>;
+  sessions: LegacySession[];
+  days: Day[];
+}
+
+function isLegacyStore(value: unknown): value is LegacyStore {
+  if (!isRecord(value)) return false;
+  if (value.version !== 1) return false;
+  if (!isCards(value.cards)) return false;
+  if (
+    !Array.isArray(value.sessions) ||
+    !value.sessions.every(
+      (session) =>
+        isRecord(session) &&
+        typeof session.startedAt === 'number' &&
+        typeof session.endedAt === 'number' &&
+        typeof session.answered === 'number' &&
+        typeof session.know === 'number' &&
+        typeof session.forgot === 'number',
+    )
+  ) {
+    return false;
+  }
+  return isDays(value.days);
+}
+
+function parseCurrent(raw: string): LoadResult {
   let parsed: unknown;
   try {
     parsed = JSON.parse(raw);
@@ -119,12 +145,58 @@ export function load(storage: Pick<Storage, 'getItem'>): LoadResult {
   return { ok: true, store: parsed };
 }
 
+function parseLegacy(raw: string): LoadResult {
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(raw);
+  } catch {
+    return { ok: false, reason: 'Сохранённые данные не читаются как JSON.' };
+  }
+
+  if (!isLegacyStore(parsed)) {
+    return {
+      ok: false,
+      reason: 'Старые сохранённые данные повреждены.',
+    };
+  }
+
+  return {
+    ok: true,
+    store: {
+      version: STORE_VERSION,
+      cards: parsed.cards,
+      days: parsed.days,
+      sessions: parsed.sessions.map((session) => ({
+        startedAt: session.startedAt,
+        endedAt: session.endedAt,
+        answered: session.answered,
+        know: session.know,
+        forgot: session.forgot,
+        section: 'molecular',
+      })),
+    },
+  };
+}
+
+export function load(storage: Pick<Storage, 'getItem'>): LoadResult {
+  const raw = storage.getItem(STORAGE_KEY);
+  if (raw !== null) return parseCurrent(raw);
+
+  const legacy = storage.getItem(LEGACY_KEY);
+  if (legacy !== null) return parseLegacy(legacy);
+
+  return { ok: true, store: emptyStore() };
+}
+
 export function save(storage: Pick<Storage, 'setItem'>, store: Store): void {
   storage.setItem(STORAGE_KEY, JSON.stringify(store));
 }
 
-export function clear(storage: Pick<Storage, 'removeItem'>): void {
+export function clear(
+  storage: Pick<Storage, 'removeItem'>,
+): void {
   storage.removeItem(STORAGE_KEY);
+  storage.removeItem(LEGACY_KEY);
 }
 
 export function markDay(store: Store, day: Day): Store {

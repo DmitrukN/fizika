@@ -1,10 +1,10 @@
-import type { Card } from '../content/cards';
-import { SECTIONS, type SectionId } from '../content/sections';
+import type { Card, Section } from '../content/sections';
 import { daysBack, type Day } from './date';
 import { isDue, NEW_CARD, type CardProgress } from './scheduler';
 import type { SessionRecord, Store } from '../storage/store';
 
-export interface DeckStats {
+export interface SectionStats {
+  title: string;
   locked: number;
   learning: number;
   untouched: number;
@@ -15,34 +15,28 @@ export function progressOf(store: Store, cardId: string): CardProgress {
   return store.cards[cardId] ?? NEW_CARD;
 }
 
-export function deckStats(cards: Card[], store: Store): DeckStats {
+export function sectionStats(section: Section, store: Store): SectionStats {
   let locked = 0;
   let learning = 0;
   let untouched = 0;
 
-  for (const card of cards) {
+  for (const card of section.cards) {
     const progress = progressOf(store, card.id);
     if (progress.interval === 7) locked += 1;
     else if (progress.interval === 0) untouched += 1;
     else learning += 1;
   }
 
-  return { locked, learning, untouched, total: cards.length };
+  return {
+    title: section.title,
+    locked,
+    learning,
+    untouched,
+    total: section.cards.length,
+  };
 }
 
-export function sectionStats(cards: Card[], store: Store, section: SectionId) {
-  const inSection = cards.filter((card) => card.section === section);
-  const stats = deckStats(inSection, store);
-  const title = SECTIONS.find((item) => item.id === section)?.title;
-  if (!title) throw new Error(`Неизвестный раздел: ${section}`);
-  return { ...stats, title };
-}
-
-export function dueCards(
-  cards: Card[],
-  store: Store,
-  day: Day,
-): Card[] {
+export function dueCards(cards: Card[], store: Store, day: Day): Card[] {
   return cards.filter((card) => isDue(progressOf(store, card.id), day));
 }
 
@@ -58,14 +52,11 @@ export function accuracy(store: Store): {
   }
 
   const lastSession = lastSessionOf(store);
-  const lastTotal = lastSession
-    ? lastSession.know + lastSession.forgot
-    : 0;
+  const lastTotal = lastSession ? lastSession.know + lastSession.forgot : 0;
 
   return {
     all: know + forgot === 0 ? null : know / (know + forgot),
-    last:
-      lastSession && lastTotal > 0 ? lastSession.know / lastTotal : null,
+    last: lastSession && lastTotal > 0 ? lastSession.know / lastTotal : null,
   };
 }
 

@@ -1,6 +1,8 @@
-import type { Card } from '../content/cards';
+import type { Card } from '../content/sections';
 import type { Answer } from '../domain/scheduler';
 import { Formula } from '../components/Formula';
+import { NotationList } from '../components/NotationList';
+import { noBreakDash } from '../ui/format';
 
 interface SessionScreenProps {
   sectionTitle: string;
@@ -52,7 +54,7 @@ export function SessionScreen({
             aria-expanded={revealed}
             onClick={revealed ? undefined : onReveal}
           >
-            <h2 className="card__title">{card.title}</h2>
+            <h2 className="card__title">{noBreakDash(card.title)}</h2>
             {!revealed && (
               <p className="card__hint">Нажмите, чтобы открыть формулу</p>
             )}
@@ -61,6 +63,7 @@ export function SessionScreen({
           {revealed && (
             <div className="card__answer">
               <Formula latex={card.formula} />
+              <NotationList items={card.notation} />
               {card.note && <p className="card__note">{card.note}</p>}
             </div>
           )}

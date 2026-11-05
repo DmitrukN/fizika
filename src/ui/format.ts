@@ -8,6 +8,10 @@ export function cardsWord(count: number): string {
   return 'карточек';
 }
 
+export function noBreakDash(value: string): string {
+  return value.replace(/—/g, '\u2060—');
+}
+
 export function formatDuration(milliseconds: number): string {
   const totalSeconds = Math.max(0, Math.round(milliseconds / 1000));
   const minutes = Math.floor(totalSeconds / 60);
