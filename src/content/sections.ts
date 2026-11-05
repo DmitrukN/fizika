@@ -265,7 +265,7 @@ export const SECTIONS: Section[] = [
         notation: [
           SYM.Q,
           SYM.c,
-          SYM.m,
+          n('m', 'масса тела, кг'),
           SYM.dT,
           n(String.raw`T_1`, 'начальная температура, К'),
           n(String.raw`T_2`, 'конечная температура, К'),
@@ -275,19 +275,19 @@ export const SECTIONS: Section[] = [
         id: 'melting',
         title: 'Плавление и кристаллизация',
         formula: String.raw`Q=\lambda m`,
-        notation: [SYM.Q, SYM.lambda, SYM.m],
+        notation: [SYM.Q, SYM.lambda, n('m', 'масса вещества, кг')],
       },
       {
         id: 'vaporization',
         title: 'Парообразование и конденсация',
         formula: String.raw`Q=Lm`,
-        notation: [SYM.Q, SYM.L, SYM.m],
+        notation: [SYM.Q, SYM.L, n('m', 'масса вещества, кг')],
       },
       {
         id: 'combustion',
         title: 'Сгорание топлива',
         formula: String.raw`Q=qm`,
-        notation: [SYM.Q, SYM.q, SYM.m],
+        notation: [SYM.Q, SYM.q, n('m', 'масса топлива, кг')],
       },
       {
         id: 'first-law',
