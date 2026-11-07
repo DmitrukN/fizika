@@ -1,0 +1,114 @@
+\documentclass[a4paper,landscape]{article}
+
+% Черновик графа формул. Источник — src/content/sections.ts.
+
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{tempora}
+\usepackage[a4paper,landscape,left=12mm,right=12mm,top=12mm,bottom=12mm]{geometry}
+\usepackage{array,booktabs,longtable}
+\usepackage{ragged2e}
+\usepackage[table]{xcolor}
+
+\definecolor{rule}{HTML}{C9CDC7}
+\arrayrulecolor{rule}
+\renewcommand{\arraystretch}{1.25}
+\setlength{\parindent}{0pt}
+\setlength{\tabcolsep}{0pt}
+
+\begin{document}
+
+{\LARGE\bfseries Молекулярная физика}\par
+\vspace{1mm}
+{\large Черновик графа формул}\par
+\vspace{2mm}
+{\footnotesize
+\textbf{Тип}: определение — язык и определения величин; основа — принимаем без вывода;
+следствие — выводится из карточек с номерами из столбца «Из чего».
+Шаги — черновик, правьте формулы и текст. Номера — из первого столбца.}\par
+\vspace{4mm}
+
+\begin{longtable}{@{}>{\RaggedRight\arraybackslash}p{7mm}@{\hspace{3mm}}>{\RaggedRight\arraybackslash}p{58mm}@{\hspace{3mm}}>{\RaggedRight\hyphenpenalty=10000\arraybackslash}p{58mm}@{\hspace{3mm}}>{\RaggedRight\arraybackslash}p{24mm}@{\hspace{3mm}}>{\RaggedRight\arraybackslash}p{35mm}@{\hspace{3mm}}>{\RaggedRight\arraybackslash}p{76mm}@{}}
+\toprule
+\textbf{№} & \textbf{Формула} & \textbf{Название} & \textbf{Тип} & \textbf{Из чего} & \textbf{Шаги} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{№} & \textbf{Формула} & \textbf{Название} & \textbf{Тип} & \textbf{Из чего} & \textbf{Шаги} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+1 & $\displaystyle \nu=\dfrac{N}{N_A}=\dfrac{m}{M}$ & Количество вещества & определение & — & — \\
+\midrule
+2 & $\displaystyle N=\nu N_A=\dfrac{m}{M}N_A$ & Число молекул & следствие & 1 & 1.~$\nu=\dfrac{N}{N_A}\ \Rightarrow\ N=\nu N_A$\newline 2.~$\nu=\dfrac{m}{M}\ \Rightarrow\ N=\dfrac{m}{M}N_A$ \\
+\midrule
+3 & $\displaystyle m_0=\dfrac{m}{N}=\dfrac{M}{N_A}$ & Масса одной молекулы & определение & — & — \\
+\midrule
+4 & $\displaystyle n=\dfrac{N}{V}=\dfrac{\nu N_A}{V}$ & Концентрация молекул & определение & — & — \\
+\midrule
+5 & $\displaystyle \rho=\dfrac{m}{V}=m_0 n$ & Плотность газа & определение & — & — \\
+\midrule
+6 & $\displaystyle p=\dfrac{1}{3}n m_0\langle v^2\rangle$ & Основное уравнение МКТ & основа & — & — \\
+\midrule
+7 & $\displaystyle p=\dfrac{2}{3}n\bar{E}_{\text{к}}$ & Давление через среднюю энергию & следствие & 6, 8 & 1.~$p=\dfrac{1}{3}n m_0\langle v^2\rangle$\newline 2.~$\bar{E}_{\text{к}}=\dfrac{m_0\langle v^2\rangle}{2}\ \Rightarrow\ m_0\langle v^2\rangle=2\bar{E}_{\text{к}}$\newline 3.~$p=\dfrac{1}{3}n\cdot 2\bar{E}_{\text{к}}=\dfrac{2}{3}n\bar{E}_{\text{к}}$ \\
+\midrule
+8 & $\displaystyle \bar{E}_{\text{к}}=\dfrac{m_0\langle v^2\rangle}{2}$ & Кинетическая энергия молекулы & определение & — & — \\
+\midrule
+9 & $\displaystyle v_{\text{кв}}=\sqrt{\langle v^2\rangle}$ & Средняя квадратичная скорость & определение & — & — \\
+\midrule
+10 & $\displaystyle v_{\text{кв}}=\sqrt{\dfrac{3kT}{m_0}}$ & Скорость через температуру & следствие & 8, 9, 14 & 1.~$\bar{E}_{\text{к}}=\dfrac{m_0\langle v^2\rangle}{2},\qquad \bar{E}_{\text{к}}=\dfrac{3}{2}kT$\newline 2.~$\dfrac{m_0 v^2}{2}=\dfrac{3}{2}kT\ \Rightarrow\ v^2=\dfrac{3kT}{m_0}$\newline 3.~$v_{\text{кв}}=\sqrt{\langle v^2\rangle}=\sqrt{\dfrac{3kT}{m_0}}$ \\
+\midrule
+11 & $\displaystyle v_{\text{кв}}=\sqrt{\dfrac{3RT}{M}}$ & Скорость через молярную массу & следствие & 10, 15, 3 & 1.~$v_{\text{кв}}=\sqrt{\dfrac{3kT}{m_0}}$\newline 2.~$k=\dfrac{R}{N_A},\qquad m_0=\dfrac{M}{N_A}\ \Rightarrow\ \dfrac{3kT}{m_0}=\dfrac{3RT}{M}$\newline 3.~$v_{\text{кв}}=\sqrt{\dfrac{3RT}{M}}$ \\
+\midrule
+12 & $\displaystyle T=t+273$ & Перевод температуры в кельвины & определение & — & — \\
+\midrule
+13 & $\displaystyle p=nkT$ & Давление через концентрацию и температуру & следствие & 7, 14 & 1.~$p=\dfrac{2}{3}n\bar{E}_{\text{к}}$\newline 2.~$\bar{E}_{\text{к}}=\dfrac{3}{2}kT$\newline 3.~$p=\dfrac{2}{3}n\cdot\dfrac{3}{2}kT=nkT$ \\
+\midrule
+14 & $\displaystyle \bar{E}_{\text{к}}=\dfrac{3}{2}kT$ & Энергия молекулы и температура & основа & — & — \\
+\midrule
+15 & $\displaystyle k=\dfrac{R}{N_A}$ & Постоянная Больцмана & определение & — & — \\
+\midrule
+16 & $\displaystyle pV=\dfrac{m}{M}RT=\nu RT$ & Уравнение Клапейрона—Менделеева & основа & — & — \\
+\midrule
+17 & $\displaystyle p=\dfrac{\rho RT}{M}$ & Давление через плотность & следствие & 16, 5 & 1.~$pV=\dfrac{m}{M}RT$\newline 2.~$\rho=\dfrac{m}{V}\ \Rightarrow\ m=\rho V$\newline 3.~$pV=\dfrac{\rho V}{M}RT\ \Rightarrow\ p=\dfrac{\rho RT}{M}$ \\
+\midrule
+18 & $\displaystyle \dfrac{p_1V_1}{T_1}=\dfrac{p_2V_2}{T_2}$ & Уравнение Клапейрона & следствие & 16 & 1.~$pV=\nu RT,\qquad m=\text{const}$\newline 2.~$\Rightarrow\ \dfrac{pV}{T}=\nu R=\text{const}$\newline 3.~$\dfrac{p_1V_1}{T_1}=\dfrac{p_2V_2}{T_2}$ \\
+\midrule
+19 & $\displaystyle p_{\text{см}}=p_1+p_2+\dots$ & Закон Дальтона & основа & — & — \\
+\midrule
+20 & $\displaystyle pV=\text{const}$ & Закон Бойля—Мариотта & следствие & 16 & 1.~$pV=\nu RT,\qquad T=\text{const},\quad m=\text{const}$\newline 2.~$pV=\nu RT=\text{const}$ \\
+\midrule
+21 & $\displaystyle \dfrac{V}{T}=\text{const}$ & Закон Гей-Люссака & следствие & 16 & 1.~$pV=\nu RT,\qquad p=\text{const}$\newline 2.~$\dfrac{V}{T}=\dfrac{\nu R}{p}=\text{const}$ \\
+\midrule
+22 & $\displaystyle \dfrac{p}{T}=\text{const}$ & Закон Шарля & следствие & 16 & 1.~$pV=\nu RT,\qquad V=\text{const}$\newline 2.~$\dfrac{p}{T}=\dfrac{\nu R}{V}=\text{const}$ \\
+\midrule
+23 & $\displaystyle U=\dfrac{3}{2}\dfrac{m}{M}RT=\dfrac{3}{2}pV$ & Внутренняя энергия идеального газа & следствие & 8, 14, 2, 15, 16 & 1.~$U=N\bar{E}_{\text{к}}$\newline 2.~$N=\nu N_A,\qquad \bar{E}_{\text{к}}=\dfrac{3}{2}kT$\newline 3.~$U=\dfrac{3}{2}\nu N_A kT$\newline 4.~$N_A k=R\ \Rightarrow\ U=\dfrac{3}{2}\nu RT$\newline 5.~$pV=\nu RT\ \Rightarrow\ U=\dfrac{3}{2}pV$ \\
+\midrule
+24 & $\displaystyle \Delta U=\dfrac{3}{2}\nu R\Delta T$ & Изменение внутренней энергии & следствие & 23 & 1.~$U=\dfrac{3}{2}\nu RT$\newline 2.~$\Delta U=\dfrac{3}{2}\nu R\Delta T$ \\
+\midrule
+25 & $\displaystyle A=p\Delta V=p(V_2-V_1)$ & Работа газа при постоянном давлении & определение & — & — \\
+\midrule
+26 & $\displaystyle Q=cm\Delta T=cm(T_2-T_1)$ & Нагревание и охлаждение & определение & — & — \\
+\midrule
+27 & $\displaystyle Q=\lambda m$ & Плавление и кристаллизация & определение & — & — \\
+\midrule
+28 & $\displaystyle Q=Lm$ & Парообразование и конденсация & определение & — & — \\
+\midrule
+29 & $\displaystyle Q=qm$ & Сгорание топлива & определение & — & — \\
+\midrule
+30 & $\displaystyle Q=\Delta U+A=\Delta U+p\Delta V$ & Первый закон термодинамики & основа & — & — \\
+\midrule
+31 & $\displaystyle \eta=\dfrac{A_{\text{п}}}{Q_1}=\dfrac{Q_1-Q_2}{Q_1}$ & КПД теплового двигателя & определение & 32 & 1.~$\eta=\dfrac{A_{\text{п}}}{Q_1}$\newline 2.~$Q_1=Q_2+A_{\text{п}}\ \Rightarrow\ A_{\text{п}}=Q_1-Q_2$\newline 3.~$\eta=\dfrac{Q_1-Q_2}{Q_1}$ \\
+\midrule
+32 & $\displaystyle Q_1=Q_2+A_{\text{п}}$ & Баланс энергии за цикл & основа & — & — \\
+\midrule
+33 & $\displaystyle \varphi=\dfrac{p_{\text{п}}}{p_{\text{н}}}\cdot100\%$ & Относительная влажность через давление & определение & — & — \\
+\midrule
+34 & $\displaystyle \varphi=\dfrac{\rho_{\text{п}}}{\rho_{\text{н}}}\cdot100\%$ & Относительная влажность через плотность & следствие & 33, 17 & 1.~$\varphi=\dfrac{p_{\text{п}}}{p_{\text{н}}}\cdot100\%$\newline 2.~$p=\dfrac{\rho RT}{M}$ при одной $T$ $\Rightarrow$ $\dfrac{p_{\text{п}}}{p_{\text{н}}}=\dfrac{\rho_{\text{п}}}{\rho_{\text{н}}}$\newline 3.~$\varphi=\dfrac{\rho_{\text{п}}}{\rho_{\text{н}}}\cdot100\%$ \\
+\end{longtable}
+
+\end{document}

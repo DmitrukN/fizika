@@ -6,3 +6,5 @@ docs/*.aux
 docs/*.log
 docs/*.out
 docs/*.pdf
+docs/*.synctex.gz
+texput.log
