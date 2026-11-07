@@ -1,0 +1,121 @@
+\documentclass[10pt,a4paper]{article}
+
+% Черновик для правки названий. Источник — src/content/sections.ts.
+
+% ---------- шрифты и язык ----------
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{tempora}
+
+% ---------- поля ----------
+\usepackage[a4paper,left=14mm,right=14mm,top=14mm,bottom=14mm]{geometry}
+
+% ---------- таблицы ----------
+\usepackage{array,booktabs,longtable}
+\usepackage{ragged2e}
+\usepackage[table]{xcolor}
+
+\definecolor{rule}{HTML}{C9CDC7}
+\arrayrulecolor{rule}
+\renewcommand{\arraystretch}{1.5}
+\setlength{\parindent}{0pt}
+\flushbottom
+
+\begin{document}
+
+{\LARGE\bfseries Молекулярная физика}\par
+\vspace{2mm}
+{\large Названия карточек}\par
+\vspace{3mm}
+{\small Формулы перенесены из шпаргалки, названия — из приложения.
+Правьте второй столбец; формулы тоже можно менять.}\par
+\vspace{6mm}
+
+\begin{longtable}{@{}>{\RaggedRight\arraybackslash}p{0.46\linewidth}@{\hspace{8mm}}>{\RaggedRight\arraybackslash}p{0.46\linewidth}@{}}
+\toprule
+\textbf{Формула} & \textbf{Название карточки} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Формула} & \textbf{Название карточки} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+$\displaystyle \nu=\dfrac{N}{N_A}=\dfrac{m}{M}$ & Количество вещества \\
+\addlinespace[2mm]
+$\displaystyle N=\nu N_A=\dfrac{m}{M}N_A$ & Число молекул \\
+\addlinespace[2mm]
+$\displaystyle m_0=\dfrac{m}{N}=\dfrac{M}{N_A}$ & Масса одной молекулы \\
+\addlinespace[2mm]
+$\displaystyle n=\dfrac{N}{V}=\dfrac{\nu N_A}{V}$ & Концентрация молекул \\
+\addlinespace[2mm]
+$\displaystyle \rho=\dfrac{m}{V}=m_0 n$ & Плотность газа \\
+\addlinespace[2mm]
+$\displaystyle p=\dfrac{1}{3}n m_0\langle v^2\rangle$ & Основное уравнение МКТ \\
+\addlinespace[2mm]
+$\displaystyle p=\dfrac{2}{3}n\bar{E}_{\text{к}}$ & Давление через среднюю энергию \\
+\addlinespace[2mm]
+$\displaystyle \bar{E}_{\text{к}}=\dfrac{m_0\langle v^2\rangle}{2}$ & Кинетическая энергия молекулы \\
+\addlinespace[2mm]
+$\displaystyle v_{\text{кв}}=\sqrt{\langle v^2\rangle}$ & Средняя квадратичная скорость \\
+\addlinespace[2mm]
+$\displaystyle v_{\text{кв}}=\sqrt{\dfrac{3kT}{m_0}}$ & Скорость через температуру \\
+\addlinespace[2mm]
+$\displaystyle v_{\text{кв}}=\sqrt{\dfrac{3RT}{M}}$ & Скорость через молярную массу \\
+\addlinespace[2mm]
+$\displaystyle T=t+273$ & Перевод температуры в кельвины \\
+\addlinespace[2mm]
+$\displaystyle p=nkT$ & Давление через концентрацию и температуру \\
+\addlinespace[2mm]
+$\displaystyle \bar{E}_{\text{к}}=\dfrac{3}{2}kT$ & Энергия молекулы и температура \\
+\addlinespace[2mm]
+$\displaystyle k=\dfrac{R}{N_A}$ & Постоянная Больцмана \\
+\addlinespace[2mm]
+$\displaystyle pV=\dfrac{m}{M}RT=\nu RT$ & Уравнение Клапейрона—Менделеева \\
+\addlinespace[2mm]
+$\displaystyle p=\dfrac{\rho RT}{M}$ & Давление через плотность \\
+\addlinespace[2mm]
+$\displaystyle \dfrac{p_1V_1}{T_1}=\dfrac{p_2V_2}{T_2}$ & Уравнение Клапейрона \\
+\addlinespace[2mm]
+$\displaystyle p_{\text{см}}=p_1+p_2+\dots$ & Закон Дальтона \\
+\addlinespace[2mm]
+$\displaystyle pV=\text{const}$ & Закон Бойля—Мариотта \\
+\addlinespace[2mm]
+$\displaystyle \dfrac{V}{T}=\text{const}$ & Закон Гей-Люссака \\
+\addlinespace[2mm]
+$\displaystyle \dfrac{p}{T}=\text{const}$ & Закон Шарля \\
+\addlinespace[2mm]
+$\displaystyle U=\dfrac{3}{2}\dfrac{m}{M}RT=\dfrac{3}{2}pV$ & Внутренняя энергия идеального газа \\
+\addlinespace[2mm]
+$\displaystyle \Delta U=\dfrac{3}{2}\nu R\Delta T$ & Изменение внутренней энергии \\
+\addlinespace[2mm]
+$\displaystyle A=p\Delta V=p(V_2-V_1)$ & Работа газа при постоянном давлении \\
+\addlinespace[2mm]
+$\displaystyle Q=cm\Delta T=cm(T_2-T_1)$ & Нагревание и охлаждение \\
+\addlinespace[2mm]
+$\displaystyle Q=\lambda m$ & Плавление и кристаллизация \\
+\addlinespace[2mm]
+$\displaystyle Q=Lm$ & Парообразование и конденсация \\
+\addlinespace[2mm]
+$\displaystyle Q=qm$ & Сгорание топлива \\
+\addlinespace[2mm]
+$\displaystyle Q=\Delta U+A=\Delta U+p\Delta V$ & Первый закон термодинамики \\
+\addlinespace[2mm]
+$\displaystyle \eta=\dfrac{A_{\text{п}}}{Q_1}=\dfrac{Q_1-Q_2}{Q_1}$ & КПД теплового двигателя \\
+\addlinespace[2mm]
+$\displaystyle Q_1=Q_2+A_{\text{п}}$ & Баланс энергии за цикл \\
+\addlinespace[2mm]
+$\displaystyle \varphi=\dfrac{p_{\text{п}}}{p_{\text{н}}}\cdot100\%$ & Относительная влажность через давление \\
+\addlinespace[2mm]
+$\displaystyle \varphi=\dfrac{\rho_{\text{п}}}{\rho_{\text{н}}}\cdot100\%$ & Относительная влажность через плотность \\
+\addlinespace[2mm]
+\end{longtable}
+
+\vspace{4mm}
+{\footnotesize Всего карточек: 34.}
+
+\end{document}
