@@ -67,15 +67,6 @@ export function SessionScreen({
 
           {revealed && (
             <div className="card__answer">
-              <CardMode
-                card={card}
-                open={derivationOpen}
-                panelId={panelId}
-                onToggle={() =>
-                  setOpenId(derivationOpen ? null : card.id)
-                }
-              />
-
               <Formula latex={card.formula} />
 
               {card.extra && (
@@ -89,7 +80,14 @@ export function SessionScreen({
                 </ul>
               )}
 
-              <NotationList items={card.notation} />
+              <CardMode
+                card={card}
+                open={derivationOpen}
+                panelId={panelId}
+                onToggle={() =>
+                  setOpenId(derivationOpen ? null : card.id)
+                }
+              />
 
               {card.derivation && (
                 <div
@@ -108,6 +106,8 @@ export function SessionScreen({
                   ))}
                 </div>
               )}
+
+              <NotationList items={card.notation} />
 
               {card.note && <p className="card__note">{card.note}</p>}
             </div>

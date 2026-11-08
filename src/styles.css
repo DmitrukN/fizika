@@ -306,10 +306,11 @@ h1 {
 }
 
 .mode {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin: 0 0 14px;
+  margin: 14px 0 0;
   padding: 0;
   border: 0;
   background: none;
@@ -336,11 +337,16 @@ h1 {
 }
 
 .mode--button {
-  margin: -14px -10px -6px;
-  padding: 14px 10px 20px;
   color: var(--accent);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+}
+
+/* Зона нажатия больше видимой строки, но не двигает вёрстку. */
+.mode--button::before {
+  content: '';
+  position: absolute;
+  inset: -14px -10px -20px;
 }
 
 .mode--button:active {

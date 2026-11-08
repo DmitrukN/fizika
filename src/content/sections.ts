@@ -521,8 +521,10 @@ export const SECTIONS: Section[] = [
         derivation: {
           from: ['first-law'],
           steps: [
-            String.raw`Q=\Delta U+A,\quad \text{цикл: } \Delta U=0\ \Rightarrow\ Q=A`,
-            String.raw`Q=Q_1-|Q_2|,\quad A=A_{\text{ц}}\ \Rightarrow\ A_{\text{ц}}=Q_1-|Q_2|`,
+            String.raw`Q=\Delta U+A,\quad \text{цикл: } \Delta U=0`,
+            String.raw`\Rightarrow\ Q=A`,
+            String.raw`Q=Q_1-|Q_2|,\quad A=A_{\text{ц}}`,
+            String.raw`\Rightarrow\ A_{\text{ц}}=Q_1-|Q_2|`,
           ],
         },
       },

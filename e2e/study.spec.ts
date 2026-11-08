@@ -11,8 +11,8 @@ test('сессия: обозначения, возврат забытой кар
   const card = page.locator('.card__hit');
   const title = await card.locator('.card__title').innerText();
 
-  await card.click();
-  await expect(page.locator('.formula .katex')).toBeVisible();
+  await page.locator('.card__hit').click();
+  await expect(page.locator('.card__answer > .formula .katex')).toBeVisible();
   await expect(page.locator('.notation dt').first()).toBeVisible();
   await expect(page.locator('.notation dd').first()).not.toBeEmpty();
 
@@ -88,6 +88,41 @@ test('на обороте виден режим карточки, вывод р�
   }
 
   throw new Error('в колоде не нашлось карточки-следствия');
+});
+
+test('шаги вывода не вылезают за ширину карточки', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: /Молекулярная физика/ }).click();
+
+  const overflow: string[] = [];
+
+  for (let index = 0; index < 41; index += 1) {
+    const title = await page.locator('.card__title').innerText();
+    await page.locator('.card__hit').click();
+
+    const toggle = page.getByRole('button', { name: 'Выводится' });
+    if ((await toggle.count()) > 0) {
+      await toggle.click();
+      const widths = await page
+        .locator('.derivation .formula')
+        .evaluateAll((nodes) =>
+          nodes.map((node) => ({
+            client: node.clientWidth,
+            scroll: node.scrollWidth,
+          })),
+        );
+      widths.forEach((item, step) => {
+        if (item.scroll > item.client + 1) {
+          overflow.push(`${title}, шаг ${step + 1}`);
+        }
+      });
+      await toggle.click();
+    }
+
+    await page.getByRole('button', { name: 'Знаю' }).click();
+  }
+
+  expect(overflow).toEqual([]);
 });
 
 test('на 402 × 874 нет прокрутки', async ({ page }) => {
