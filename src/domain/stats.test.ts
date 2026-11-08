@@ -27,8 +27,8 @@ describe('статистика раздела', () => {
       title: 'Молекулярная физика',
       locked: 1,
       learning: 1,
-      untouched: 32,
-      total: 34,
+      untouched: 39,
+      total: 41,
     });
   });
 
@@ -36,7 +36,7 @@ describe('статистика раздела', () => {
     const store = storeWith({
       amount: { ...NEW_CARD, interval: 5, due: '2026-12-01' },
     });
-    expect(dueCards(ALL_CARDS, store, '2026-11-05')).toHaveLength(33);
+    expect(dueCards(ALL_CARDS, store, '2026-11-05')).toHaveLength(40);
   });
 
   it('считает точность по всем ответам и по последней сессии', () => {

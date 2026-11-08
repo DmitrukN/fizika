@@ -52,7 +52,42 @@ test('ответы переживают перезагрузку', async ({ page
 
   await page.reload();
   await expect(page.getByRole('heading', { name: 'Физика' })).toBeVisible();
-  await expect(page.locator('.section-row__count')).toHaveText('33 из 34');
+  await expect(page.locator('.section-row__count')).toHaveText('40 из 41');
+});
+
+test('на обороте виден режим карточки, вывод раскрывается по слову', async ({
+  page,
+}) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: /Молекулярная физика/ }).click();
+
+  for (let index = 0; index < 45; index += 1) {
+    await page.locator('.card__hit').click();
+
+    const mode = page.locator('.mode').first();
+    await expect(mode).toBeVisible();
+    await expect(mode.locator('.mode__label')).toHaveText(
+      /Учить наизусть|Выводится/,
+    );
+
+    const toggle = page.getByRole('button', { name: 'Выводится' });
+    if ((await toggle.count()) > 0) {
+      const panel = page.locator('.derivation');
+      await expect(panel).toBeHidden();
+      await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+
+      await toggle.click();
+      await expect(panel).toBeVisible();
+      await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+      await expect(panel.locator('.formula .katex').first()).toBeVisible();
+      await expect(panel.locator('.derivation__from')).toContainText('Из:');
+      return;
+    }
+
+    await page.getByRole('button', { name: 'Знаю' }).click();
+  }
+
+  throw new Error('в колоде не нашлось карточки-следствия');
 });
 
 test('на 402 × 874 нет прокрутки', async ({ page }) => {

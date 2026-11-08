@@ -3,8 +3,8 @@ import katex from 'katex';
 import { ALL_CARDS, SECTIONS } from './sections';
 
 describe('содержимое разделов', () => {
-  it('содержит 34 карточки', () => {
-    expect(ALL_CARDS).toHaveLength(34);
+  it('содержит 41 карточку', () => {
+    expect(ALL_CARDS).toHaveLength(41);
   });
 
   it('не повторяет идентификаторы', () => {
@@ -58,6 +58,63 @@ describe('содержимое разделов', () => {
             }),
           `${card.id}: ${item.symbol}`,
         ).not.toThrow();
+      }
+    }
+  });
+
+  it('рисует дополнительные строки и шаги вывода через KaTeX', () => {
+    const latex = ALL_CARDS.flatMap((card) => [
+      ...(card.extra ?? []).map((item) => ({
+        where: `${card.id}: ${item.label}`,
+        value: item.latex,
+      })),
+      ...(card.derivation?.steps ?? []).map((step, index) => ({
+        where: `${card.id}: шаг ${index + 1}`,
+        value: step,
+      })),
+    ]);
+
+    expect(latex.length).toBeGreaterThan(0);
+
+    for (const item of latex) {
+      expect(
+        () =>
+          katex.renderToString(item.value, {
+            throwOnError: true,
+            displayMode: true,
+          }),
+        item.where,
+      ).not.toThrow();
+    }
+  });
+
+  it('делит карточки на 8 основ, 16 определений и 17 следствий', () => {
+    const count = (kind: string) =>
+      ALL_CARDS.filter((card) => card.kind === kind).length;
+
+    expect(count('basis')).toBe(8);
+    expect(count('definition')).toBe(16);
+    expect(count('consequence')).toBe(17);
+  });
+
+  it('даёт каждому следствию вывод с существующими источниками', () => {
+    const ids = new Set(ALL_CARDS.map((card) => card.id));
+
+    for (const card of ALL_CARDS) {
+      if (card.kind === 'consequence') {
+        expect(card.derivation, card.id).toBeDefined();
+        const derivation = card.derivation;
+        if (!derivation) continue;
+
+        expect(derivation.steps.length, card.id).toBeGreaterThan(0);
+        expect(derivation.from.length, card.id).toBeGreaterThan(0);
+        expect(derivation.from, card.id).not.toContain(card.id);
+
+        for (const source of derivation.from) {
+          expect(ids.has(source), `${card.id} ← ${source}`).toBe(true);
+        }
+      } else {
+        expect(card.derivation, card.id).toBeUndefined();
       }
     }
   });

@@ -1,6 +1,8 @@
-import type { Card } from '../content/sections';
+import { useState } from 'react';
+import { cardById, type Card } from '../content/sections';
 import type { Answer } from '../domain/scheduler';
-import { Formula } from '../components/Formula';
+import { CardMode } from '../components/CardMode';
+import { Formula, InlineFormula } from '../components/Formula';
 import { NotationList } from '../components/NotationList';
 import { noBreakDash } from '../ui/format';
 
@@ -25,7 +27,10 @@ export function SessionScreen({
   onAnswer,
   onFinish,
 }: SessionScreenProps) {
+  const [openId, setOpenId] = useState<string | null>(null);
   const filled = total === 0 ? 0 : (answered / total) * 100;
+  const derivationOpen = openId === card.id;
+  const panelId = `derivation-${card.id}`;
 
   return (
     <main className="screen screen--session">
@@ -62,8 +67,48 @@ export function SessionScreen({
 
           {revealed && (
             <div className="card__answer">
+              <CardMode
+                card={card}
+                open={derivationOpen}
+                panelId={panelId}
+                onToggle={() =>
+                  setOpenId(derivationOpen ? null : card.id)
+                }
+              />
+
               <Formula latex={card.formula} />
+
+              {card.extra && (
+                <ul className="extra">
+                  {card.extra.map((item) => (
+                    <li key={item.label} className="extra__row">
+                      <span className="extra__label">{item.label}:</span>
+                      <InlineFormula latex={item.latex} />
+                    </li>
+                  ))}
+                </ul>
+              )}
+
               <NotationList items={card.notation} />
+
+              {card.derivation && (
+                <div
+                  id={panelId}
+                  className="derivation"
+                  hidden={!derivationOpen}
+                >
+                  <p className="derivation__from">
+                    Из:{' '}
+                    {card.derivation.from
+                      .map((id) => noBreakDash(cardById(id).title))
+                      .join(' · ')}
+                  </p>
+                  {card.derivation.steps.map((step) => (
+                    <Formula key={step} latex={step} />
+                  ))}
+                </div>
+              )}
+
               {card.note && <p className="card__note">{card.note}</p>}
             </div>
           )}
