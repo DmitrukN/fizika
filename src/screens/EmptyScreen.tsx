@@ -12,7 +12,7 @@ export function EmptyScreen({
   return (
     <main className="screen screen--center">
       <div className="message">
-        <h1>На сегодня всё</h1>
+        <h1>На сегодня все</h1>
         <p className="message__text">
           В разделе «{sectionTitle}» нет созревших карточек. Можно повторить все
           подряд — интервалы от этого не сбросятся.

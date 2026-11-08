@@ -26,7 +26,7 @@ function fakeStorage(initial: Record<string, string> = {}) {
 }
 
 describe('хранилище', () => {
-  it('на пустом хранилище отдаёт пустой прогресс', () => {
+  it('на пустом хранилище отдает пустой прогресс', () => {
     const result = load(fakeStorage());
     expect(result.ok).toBe(true);
     if (result.ok) expect(result.store).toEqual(emptyStore());
@@ -112,7 +112,7 @@ describe('хранилище', () => {
     if (!result.ok) expect(result.reason).toContain('версия');
   });
 
-  it('сообщает о повреждённой структуре', () => {
+  it('сообщает о поврежденной структуре', () => {
     const result = load(
       fakeStorage({
         [STORAGE_KEY]: JSON.stringify({

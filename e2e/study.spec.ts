@@ -37,7 +37,7 @@ test('сессия: обозначения, возврат забытой кар
   await page.getByRole('button', { name: 'Прогресс' }).click();
   await expect(page.getByRole('heading', { name: 'Прогресс' })).toBeVisible();
   await expect(page.getByText('закреплено').first()).toBeVisible();
-  await expect(page.getByText('Точность за всё время')).toBeVisible();
+  await expect(page.getByText('Точность за все время')).toBeVisible();
 });
 
 test('ответы переживают перезагрузку', async ({ page }) => {
@@ -67,10 +67,10 @@ test('на обороте виден режим карточки, вывод р�
     const mode = page.locator('.mode').first();
     await expect(mode).toBeVisible();
     await expect(mode.locator('.mode__label')).toHaveText(
-      /Учить наизусть|Выводится/,
+      /Учить наизусть|Можно вывести/,
     );
 
-    const toggle = page.getByRole('button', { name: 'Выводится' });
+    const toggle = page.getByRole('button', { name: 'Можно вывести' });
     if ((await toggle.count()) > 0) {
       const panel = page.locator('.derivation');
       await expect(panel).toBeHidden();

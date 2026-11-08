@@ -85,7 +85,7 @@ export function ProgressScreen({ store, day, onBack }: ProgressScreenProps) {
           <span className="days__last">
             {last
               ? `последняя · ${formatDateTimeShort(last.endedAt)}`
-              : 'занятий ещё не было'}
+              : 'занятий еще не было'}
           </span>
         </div>
         <div className="days__grid">
@@ -104,7 +104,7 @@ export function ProgressScreen({ store, day, onBack }: ProgressScreenProps) {
 
       <section className="accuracy" aria-label="Точность">
         <div className="accuracy__row">
-          <span>Точность за всё время</span>
+          <span>Точность за все время</span>
           <span className="mono">{formatPercent(scores.all)}</span>
         </div>
         <div className="accuracy__row">

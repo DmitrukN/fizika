@@ -9,6 +9,7 @@
   --accent-pressed: #173ea8;
   --accent-ink: #ffffff;
   --danger: #9c3a2c;
+  --memo: #8d3b34;
   --tap: 52px;
   --font-ui: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI",
     system-ui, sans-serif;
@@ -315,7 +316,7 @@ h1 {
   border: 0;
   background: none;
   font: inherit;
-  color: var(--ink);
+  color: var(--memo);
   text-align: left;
 }
 
@@ -342,7 +343,7 @@ h1 {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Зона нажатия больше видимой строки, но не двигает вёрстку. */
+/* Зона нажатия больше видимой строки, но не двигает верстку. */
 .mode--button::before {
   content: '';
   position: absolute;

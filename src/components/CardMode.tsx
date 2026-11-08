@@ -26,7 +26,7 @@ export function CardMode({ card, open, panelId, onToggle }: CardModeProps) {
       onClick={onToggle}
     >
       <span className="mode__rule" aria-hidden="true" />
-      <span className="mode__label">Выводится</span>
+      <span className="mode__label">Можно вывести</span>
       <span className="mode__chevron" aria-hidden="true" />
     </button>
   );

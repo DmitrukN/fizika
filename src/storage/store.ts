@@ -128,7 +128,7 @@ function parseCurrent(raw: string): LoadResult {
   try {
     parsed = JSON.parse(raw);
   } catch {
-    return { ok: false, reason: 'Сохранённые данные не читаются как JSON.' };
+    return { ok: false, reason: 'Сохраненные данные не читаются как JSON.' };
   }
 
   if (isRecord(parsed) && parsed.version !== STORE_VERSION) {
@@ -139,7 +139,7 @@ function parseCurrent(raw: string): LoadResult {
   }
 
   if (!isStore(parsed)) {
-    return { ok: false, reason: 'Структура сохранённых данных повреждена.' };
+    return { ok: false, reason: 'Структура сохраненных данных повреждена.' };
   }
 
   return { ok: true, store: parsed };
@@ -150,13 +150,13 @@ function parseLegacy(raw: string): LoadResult {
   try {
     parsed = JSON.parse(raw);
   } catch {
-    return { ok: false, reason: 'Сохранённые данные не читаются как JSON.' };
+    return { ok: false, reason: 'Сохраненные данные не читаются как JSON.' };
   }
 
   if (!isLegacyStore(parsed)) {
     return {
       ok: false,
-      reason: 'Старые сохранённые данные повреждены.',
+      reason: 'Старые сохраненные данные повреждены.',
     };
   }
 

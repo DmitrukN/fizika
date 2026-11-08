@@ -16,7 +16,7 @@ function storeWith(cards: Store['cards']): Store {
 }
 
 describe('статистика раздела', () => {
-  it('делит карточки на закреплённые, в работе и нетронутые', () => {
+  it('делит карточки на закрепленные, в работе и нетронутые', () => {
     const store = storeWith({
       amount: { ...NEW_CARD, interval: 7 },
       molecules: { ...NEW_CARD, interval: 3 },

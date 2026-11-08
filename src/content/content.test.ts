@@ -97,7 +97,7 @@ describe('содержимое разделов', () => {
     expect(count('consequence')).toBe(17);
   });
 
-  it('даёт каждому следствию вывод с существующими источниками', () => {
+  it('дает каждому следствию вывод с существующими источниками', () => {
     const ids = new Set(ALL_CARDS.map((card) => card.id));
 
     for (const card of ALL_CARDS) {

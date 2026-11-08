@@ -7,7 +7,7 @@
 **Status:** ready-for-agent
 
 - [ ] `npm run build` собирается с относительным base path
-- [ ] Репозиторий запушен, GitHub Pages включён
+- [ ] Репозиторий запушен, GitHub Pages включен
 - [ ] Ссылка открывается на iPhone в портрете
 - [ ] `apple-mobile-web-app-capable`, `theme-color` и иконка на домашний экран настроены
 - [ ] README содержит ссылку и команду обновления
