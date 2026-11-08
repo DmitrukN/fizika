@@ -108,8 +108,6 @@ export function SessionScreen({
               )}
 
               <NotationList items={card.notation} />
-
-              {card.note && <p className="card__note">{card.note}</p>}
             </div>
           )}
         </article>

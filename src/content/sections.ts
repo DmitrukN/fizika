@@ -25,7 +25,6 @@ export interface Card {
   kind: CardKind;
   extra?: ExtraLine[];
   derivation?: Derivation;
-  note?: string;
 }
 
 export interface Section {
@@ -186,7 +185,6 @@ export const SECTIONS: Section[] = [
         formula: String.raw`\rho=\dfrac{m}{V}`,
         notation: [SYM.rho, SYM.m, SYM.V],
         kind: 'definition',
-        note: 'Определение из 7 класса: подходит для любого тела, не только для газа.',
       },
       {
         id: 'density-number',
@@ -208,7 +206,6 @@ export const SECTIONS: Section[] = [
         formula: String.raw`p=\dfrac{1}{3}n m_0\langle v^2\rangle`,
         notation: [SYM.p, SYM.n, SYM.m0, SYM.v2],
         kind: 'basis',
-        note: 'Давление — результат ударов молекул о стенку.',
       },
       {
         id: 'molecule-energy',
@@ -239,7 +236,6 @@ export const SECTIONS: Section[] = [
         formula: String.raw`T=t+273`,
         notation: [SYM.T, SYM.t],
         kind: 'definition',
-        note: 'В задачах температура всегда переводится в кельвины.',
       },
       {
         id: 'pressure-temperature',
@@ -254,7 +250,6 @@ export const SECTIONS: Section[] = [
         formula: String.raw`\langle E_{\text{к}}\rangle=\dfrac{3}{2}kT`,
         notation: [SYM.Ek, SYM.k, SYM.T],
         kind: 'basis',
-        note: 'Температура задаёт среднюю энергию, а не скорость отдельной молекулы.',
       },
       {
         id: 'gas-constant',
@@ -269,7 +264,6 @@ export const SECTIONS: Section[] = [
         formula: String.raw`v_{\text{кв}}=\sqrt{\langle v^2\rangle}`,
         notation: [SYM.vkv, SYM.v2],
         kind: 'definition',
-        note: '⟨v²⟩ и v_кв — разные величины: первая стоит в уравнении давления, вторая отвечает на вопрос о скорости молекулы.',
       },
       {
         id: 'vrms-temperature',
@@ -314,7 +308,6 @@ export const SECTIONS: Section[] = [
         formula: String.raw`pV=\dfrac{m}{M}RT=\nu RT`,
         notation: [SYM.p, SYM.V, SYM.m, SYM.M, SYM.R, SYM.T, SYM.nu],
         kind: 'basis',
-        note: 'Работает, только если масса газа не меняется.',
       },
       {
         id: 'clapeyron',
@@ -336,7 +329,6 @@ export const SECTIONS: Section[] = [
             String.raw`\Rightarrow\ \dfrac{p_1V_1}{T_1}=\dfrac{p_2V_2}{T_2}`,
           ],
         },
-        note: 'Для двух состояний одного газа при неизменной массе.',
       },
       {
         id: 'dalton',
@@ -348,7 +340,6 @@ export const SECTIONS: Section[] = [
           n(String.raw`p_2`, 'парциальное давление второго газа, Па'),
         ],
         kind: 'basis',
-        note: 'Для смеси уравнение состояния пишут для каждого газа отдельно, а давления складывают.',
       },
       {
         id: 'state-density',
@@ -377,7 +368,6 @@ export const SECTIONS: Section[] = [
             String.raw`\Rightarrow\ pV=\text{const}`,
           ],
         },
-        note: 'T = const, масса не меняется. На графике p(V) — гипербола.',
       },
       {
         id: 'gay-lussac',
@@ -392,7 +382,6 @@ export const SECTIONS: Section[] = [
             String.raw`\Rightarrow\ \dfrac{V}{T}=\text{const}`,
           ],
         },
-        note: 'p = const, масса не меняется.',
       },
       {
         id: 'charles',
@@ -407,7 +396,6 @@ export const SECTIONS: Section[] = [
             String.raw`\Rightarrow\ \dfrac{p}{T}=\text{const}`,
           ],
         },
-        note: 'V = const, масса не меняется.',
       },
       {
         id: 'internal-energy',
@@ -442,7 +430,6 @@ export const SECTIONS: Section[] = [
         formula: String.raw`Q=\Delta U+A=\Delta U+p\Delta V`,
         notation: [SYM.Q, SYM.dU, SYM.A, SYM.p, SYM.dV],
         kind: 'basis',
-        note: 'Тело получает тепло Q > 0, газ расширяется A > 0. При изохорном процессе A = 0, при изотермическом ΔU = 0.',
       },
       {
         id: 'work',
@@ -510,7 +497,6 @@ export const SECTIONS: Section[] = [
         formula: String.raw`\eta=\dfrac{A_{\text{ц}}}{Q_1}`,
         notation: [SYM.eta, SYM.Acyc, SYM.Q1],
         kind: 'definition',
-        note: 'КПД всегда меньше единицы: часть теплоты отдаётся холодильнику.',
       },
       {
         id: 'cycle-work',
@@ -562,7 +548,6 @@ export const SECTIONS: Section[] = [
             String.raw`\Rightarrow\ \varphi=\dfrac{\rho_{\text{п}}}{\rho_{\text{н}}}`,
           ],
         },
-        note: 'Давление насыщенного пара зависит только от температуры; сжатие не повышает влажность.',
       },
     ],
   },
