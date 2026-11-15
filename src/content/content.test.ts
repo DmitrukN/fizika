@@ -88,13 +88,13 @@ describe('содержимое разделов', () => {
     }
   });
 
-  it('делит карточки на 10 основ, 23 определения и 31 следствие', () => {
+  it('делит карточки на 11 основ, 23 определения и 30 следствий', () => {
     const count = (kind: string) =>
       ALL_CARDS.filter((card) => card.kind === kind).length;
 
-    expect(count('basis')).toBe(10);
+    expect(count('basis')).toBe(11);
     expect(count('definition')).toBe(23);
-    expect(count('consequence')).toBe(31);
+    expect(count('consequence')).toBe(30);
   });
 
   it('дает каждому следствию вывод с существующими источниками', () => {
