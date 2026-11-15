@@ -52,7 +52,9 @@ test('ответы переживают перезагрузку', async ({ page
 
   await page.reload();
   await expect(page.getByRole('heading', { name: 'Физика' })).toBeVisible();
-  await expect(page.locator('.section-row__count')).toHaveText('40 из 41');
+  await expect(page.locator('.section-row__count').first()).toHaveText(
+    '40 из 41',
+  );
 });
 
 test('на обороте виден режим карточки, вывод раскрывается по слову', async ({
@@ -91,35 +93,37 @@ test('на обороте виден режим карточки, вывод р�
 });
 
 test('шаги вывода не вылезают за ширину карточки', async ({ page }) => {
-  await page.goto('/');
-  await page.getByRole('button', { name: /Молекулярная физика/ }).click();
-
   const overflow: string[] = [];
 
-  for (let index = 0; index < 41; index += 1) {
-    const title = await page.locator('.card__title').innerText();
-    await page.locator('.card__hit').click();
+  for (const section of ['Молекулярная физика', 'Кинематика']) {
+    await page.goto('/');
+    await page.getByRole('button', { name: new RegExp(section) }).click();
 
-    const toggle = page.getByRole('button', { name: 'Выводится' });
-    if ((await toggle.count()) > 0) {
-      await toggle.click();
-      const widths = await page
-        .locator('.derivation .formula')
-        .evaluateAll((nodes) =>
-          nodes.map((node) => ({
-            client: node.clientWidth,
-            scroll: node.scrollWidth,
-          })),
-        );
-      widths.forEach((item, step) => {
-        if (item.scroll > item.client + 1) {
-          overflow.push(`${title}, шаг ${step + 1}`);
-        }
-      });
-      await toggle.click();
+    while ((await page.locator('.card__hit').count()) > 0) {
+      const title = await page.locator('.card__title').innerText();
+      await page.locator('.card__hit').click();
+
+      const toggle = page.getByRole('button', { name: 'Можно вывести' });
+      if ((await toggle.count()) > 0) {
+        await toggle.click();
+        const widths = await page
+          .locator('.derivation .formula')
+          .evaluateAll((nodes) =>
+            nodes.map((node) => ({
+              client: node.clientWidth,
+              scroll: node.scrollWidth,
+            })),
+          );
+        widths.forEach((item, step) => {
+          if (item.scroll > item.client + 1) {
+            overflow.push(`${title}, шаг ${step + 1}`);
+          }
+        });
+        await toggle.click();
+      }
+
+      await page.getByRole('button', { name: 'Знаю' }).click();
     }
-
-    await page.getByRole('button', { name: 'Знаю' }).click();
   }
 
   expect(overflow).toEqual([]);
