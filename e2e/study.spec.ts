@@ -52,9 +52,11 @@ test('ответы переживают перезагрузку', async ({ page
 
   await page.reload();
   await expect(page.getByRole('heading', { name: 'Физика' })).toBeVisible();
-  await expect(page.locator('.section-row__count').first()).toHaveText(
-    '40 из 41',
-  );
+  await expect(
+    page
+      .getByRole('button', { name: /Молекулярная физика/ })
+      .locator('.section-row__count'),
+  ).toHaveText('40 из 41');
 });
 
 test('на обороте виден режим карточки, вывод раскрывается по слову', async ({

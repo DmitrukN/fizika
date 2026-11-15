@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ALL_CARDS, SECTIONS } from '../content/sections';
+import { ALL_CARDS, sectionById } from '../content/sections';
 import { NEW_CARD } from './scheduler';
 import {
   accuracy,
@@ -23,7 +23,7 @@ describe('статистика раздела', () => {
       density: { ...NEW_CARD, interval: 0 },
     });
 
-    expect(sectionStats(SECTIONS[0], store)).toEqual({
+    expect(sectionStats(sectionById('molecular'), store)).toEqual({
       title: 'Молекулярная физика',
       locked: 1,
       learning: 1,
@@ -36,7 +36,7 @@ describe('статистика раздела', () => {
     const store = storeWith({
       amount: { ...NEW_CARD, interval: 5, due: '2026-12-01' },
     });
-    expect(dueCards(ALL_CARDS, store, '2026-11-05')).toHaveLength(65);
+    expect(dueCards(ALL_CARDS, store, '2026-11-05')).toHaveLength(63);
   });
 
   it('считает точность по всем ответам и по последней сессии', () => {
