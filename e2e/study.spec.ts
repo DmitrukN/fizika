@@ -97,7 +97,11 @@ test('на обороте виден режим карточки, вывод р�
 test('шаги вывода не вылезают за ширину карточки', async ({ page }) => {
   const overflow: string[] = [];
 
-  for (const section of ['Молекулярная физика', 'Кинематика']) {
+  for (const section of [
+    'Молекулярная физика',
+    'Кинематика',
+    'Динамика',
+  ]) {
     await page.goto('/');
     await page.getByRole('button', { name: new RegExp(section) }).click();
 

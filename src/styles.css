@@ -385,6 +385,18 @@ h1 {
   margin: 0;
 }
 
+.card__figure {
+  margin: 16px 0 0;
+}
+
+.card__figure svg {
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  margin: 0 auto;
+}
+
 .tex-inline .katex {
   font-size: 1em;
 }

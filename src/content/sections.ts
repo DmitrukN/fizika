@@ -1,4 +1,4 @@
-export type SectionId = 'molecular' | 'kinematics';
+export type SectionId = 'molecular' | 'kinematics' | 'dynamics';
 
 export interface Notation {
   symbol: string;
@@ -6,6 +6,8 @@ export interface Notation {
 }
 
 export type CardKind = 'basis' | 'definition' | 'consequence';
+
+export type FigureId = 'incline-friction' | 'incline-acceleration';
 
 export interface ExtraLine {
   label: string;
@@ -23,6 +25,7 @@ export interface Card {
   formula: string;
   notation: Notation[];
   kind: CardKind;
+  figure?: FigureId;
   extra?: ExtraLine[];
   derivation?: Derivation;
 }
@@ -180,6 +183,86 @@ const KI = {
   radius: n('R', 'радиус, м'),
   vSpeed: n('v', 'линейная скорость, м/с'),
   aCentr: n('a', 'центростремительное ускорение, м/с²'),
+};
+
+const DY = {
+  Fi: n(String.raw`\vec F_i`, 'сила, приложенная к телу, Н'),
+  i: n('i', 'номер силы'),
+  F: n(String.raw`\vec F`, 'равнодействующая сила, Н'),
+  Fplain: n('F', 'сила, Н'),
+  m: n('m', 'масса тела, кг'),
+  a: n(String.raw`\vec a`, 'ускорение, м/с²'),
+  F12: n(
+    String.raw`\vec F_{12}`,
+    'сила, с которой тело 1 действует на тело 2, Н',
+  ),
+  F21: n(
+    String.raw`\vec F_{21}`,
+    'сила, с которой тело 2 действует на тело 1, Н',
+  ),
+
+  G: n('G', 'гравитационная постоянная, 6,67·10⁻¹¹ Н·м²/кг²'),
+  Fgrav: n('F', 'сила притяжения, Н'),
+  m1: n('m_1', 'масса первого тела, кг'),
+  m2: n('m_2', 'масса второго тела, кг'),
+  r: n('r', 'расстояние между центрами тел, м'),
+
+  Ft: n(String.raw`F_{\text{т}}`, 'сила тяжести, Н'),
+  g: n('g', 'ускорение свободного падения, 9,8 м/с²'),
+  Fupr: n(String.raw`F_{\text{упр}}`, 'сила упругости, Н'),
+  k: n('k', 'жесткость, Н/м'),
+  dl: n(String.raw`\Delta l`, 'удлинение, м'),
+
+  Ftr: n(String.raw`F_{\text{тр}}`, 'сила трения, Н'),
+  mu: n(String.raw`\mu`, 'коэффициент трения'),
+  N: n('N', 'сила нормальной реакции, Н'),
+
+  FA: n(String.raw`F_{\text{A}}`, 'сила Архимеда, Н'),
+  rhoZh: n(String.raw`\rho_{\text{ж}}`, 'плотность жидкости, кг/м³'),
+  Vpogr: n(
+    String.raw`V_{\text{погр}}`,
+    'объем погруженной части тела, м³',
+  ),
+  rhoT: n(String.raw`\rho_{\text{т}}`, 'плотность тела, кг/м³'),
+
+  P: n('P', 'вес тела, Н'),
+  alpha: n(String.raw`\alpha`, 'угол наклона плоскости к горизонту'),
+
+  Fc: n(String.raw`F_{\text{ц}}`, 'центростремительная сила, Н'),
+  v: n('v', 'скорость, м/с'),
+  R: n('R', 'радиус, м'),
+  omega: n(String.raw`\omega`, 'угловая скорость, рад/с'),
+
+  Ek: n(String.raw`E_{\text{к}}`, 'кинетическая энергия, Дж'),
+  Ep: n(String.raw`E_{\text{п}}`, 'потенциальная энергия, Дж'),
+  E: n('E', 'полная механическая энергия, Дж'),
+  h: n('h', 'высота, м'),
+  h1: n('h_1', 'начальная высота, м'),
+  h2: n('h_2', 'конечная высота, м'),
+  Ek1: n(String.raw`E_{\text{к}1}`, 'кинетическая энергия в начале, Дж'),
+  Ek2: n(String.raw`E_{\text{к}2}`, 'кинетическая энергия в конце, Дж'),
+  Ep1: n(String.raw`E_{\text{п}1}`, 'потенциальная энергия в начале, Дж'),
+  Ep2: n(String.raw`E_{\text{п}2}`, 'потенциальная энергия в конце, Дж'),
+
+  A: n('A', 'работа, Дж'),
+  s: n('s', 'перемещение, м'),
+  x: n('x', 'деформация пружины, м'),
+  Q: n('Q', 'теплота, Дж'),
+
+  p: n(String.raw`\vec p`, 'импульс тела, кг·м/с'),
+  p1: n(String.raw`\vec p_1`, 'импульс первого тела, кг·м/с'),
+  p2: n(String.raw`\vec p_2`, 'импульс второго тела, кг·м/с'),
+  dp: n(String.raw`\Delta\vec p`, 'изменение импульса, кг·м/с'),
+  J: n(String.raw`\vec J`, 'импульс силы, Н·с'),
+  dt: n(String.raw`\Delta t`, 'время действия силы, с'),
+  v1: n(String.raw`\vec v_1`, 'скорость первого тела до взаимодействия, м/с'),
+  v2: n(String.raw`\vec v_2`, 'скорость второго тела до взаимодействия, м/с'),
+  v1p: n(String.raw`\vec v_1'`, 'скорость первого тела после, м/с'),
+  v2p: n(String.raw`\vec v_2'`, 'скорость второго тела после, м/с'),
+
+  eta: n(String.raw`\eta`, 'КПД'),
+  Ap: n(String.raw`A_{\text{п}}`, 'полезная работа, Дж'),
+  Az: n(String.raw`A_{\text{з}}`, 'затраченная работа, Дж'),
 };
 
 export const SECTIONS: Section[] = [
@@ -905,6 +988,367 @@ export const SECTIONS: Section[] = [
             String.raw`\Rightarrow\ \varphi=\dfrac{\rho_{\text{п}}}{\rho_{\text{н}}}`,
           ],
         },
+      },
+    ],
+  },
+  {
+    id: 'dynamics',
+    title: 'Динамика. Законы сохранения',
+    cards: [
+      {
+        id: 'newton-first',
+        title: 'Первый закон Ньютона',
+        formula: String.raw`\sum_i\vec F_i=0`,
+        notation: [DY.Fi, DY.i],
+        kind: 'basis',
+      },
+      {
+        id: 'newton-second',
+        title: 'Второй закон Ньютона',
+        formula: String.raw`\vec F=m\vec a`,
+        notation: [DY.F, DY.m, DY.a],
+        kind: 'basis',
+      },
+      {
+        id: 'newton-third',
+        title: 'Третий закон Ньютона',
+        formula: String.raw`\vec F_{12}=-\vec F_{21}`,
+        notation: [DY.F12, DY.F21],
+        kind: 'basis',
+      },
+      {
+        id: 'gravitation',
+        title: 'Закон всемирного тяготения',
+        formula: String.raw`F=G\dfrac{m_1m_2}{r^2}`,
+        notation: [DY.Fgrav, DY.G, DY.m1, DY.m2, DY.r],
+        kind: 'basis',
+      },
+      {
+        id: 'gravity-force',
+        title: 'Сила тяжести',
+        formula: String.raw`F_{\text{т}}=mg`,
+        notation: [DY.Ft, DY.m, DY.g],
+        kind: 'definition',
+      },
+      {
+        id: 'hooke',
+        title: 'Закон Гука',
+        formula: String.raw`F_{\text{упр}}=k\Delta l`,
+        notation: [DY.Fupr, DY.k, DY.dl],
+        kind: 'basis',
+      },
+      {
+        id: 'friction-sliding',
+        title: 'Сила трения скольжения',
+        formula: String.raw`F_{\text{тр}}=\mu N`,
+        notation: [DY.Ftr, DY.mu, DY.N],
+        kind: 'basis',
+      },
+      {
+        id: 'archimedes',
+        title: 'Сила Архимеда',
+        formula: String.raw`F_{\text{A}}=\rho_{\text{ж}}gV_{\text{погр}}`,
+        notation: [DY.FA, DY.rhoZh, DY.g, DY.Vpogr],
+        kind: 'basis',
+      },
+      {
+        id: 'floating',
+        title: 'Условие плавания тела',
+        formula: String.raw`\rho_{\text{т}}\le\rho_{\text{ж}}`,
+        notation: [DY.rhoT, DY.rhoZh],
+        kind: 'consequence',
+        derivation: {
+          from: ['gravity-force', 'archimedes'],
+          steps: [
+            String.raw`F_{\text{A}}=\rho_{\text{ж}}gV_{\text{погр}},\quad mg=\rho_{\text{т}}gV`,
+            String.raw`V_{\text{погр}}=V,\quad F_{\text{A}}\ge mg\ \Rightarrow\ \rho_{\text{т}}\le\rho_{\text{ж}}`,
+          ],
+        },
+      },
+      {
+        id: 'weight',
+        title: 'Вес тела',
+        formula: String.raw`P=N`,
+        notation: [DY.P, DY.N],
+        kind: 'definition',
+      },
+      {
+        id: 'weight-rest',
+        title: 'Вес в покое на горизонтальной опоре',
+        formula: String.raw`P=mg`,
+        notation: [DY.P, DY.m, DY.g],
+        kind: 'consequence',
+        derivation: {
+          from: ['newton-second', 'weight'],
+          steps: [
+            String.raw`a=0\ \Rightarrow\ N=mg`,
+            String.raw`P=N\ \Rightarrow\ P=mg`,
+          ],
+        },
+      },
+      {
+        id: 'normal-incline',
+        title: 'Сила нормальной реакции на наклонной плоскости',
+        formula: String.raw`N=mg\cos\alpha`,
+        notation: [DY.N, DY.m, DY.g, DY.alpha],
+        kind: 'consequence',
+        derivation: {
+          from: ['newton-second'],
+          steps: [
+            String.raw`N-mg\cos\alpha=0\quad \text{при } a_y=0`,
+            String.raw`\Rightarrow\ N=mg\cos\alpha`,
+          ],
+        },
+      },
+      {
+        id: 'weight-elevator-up',
+        title: 'Вес в лифте, движущемся вверх с ускорением',
+        formula: String.raw`P=m(g+a)`,
+        notation: [DY.P, DY.m, DY.g, DY.a],
+        kind: 'consequence',
+        derivation: {
+          from: ['newton-second', 'weight'],
+          steps: [
+            String.raw`N-mg=ma\ \Rightarrow\ N=m(g+a)`,
+            String.raw`P=N\ \Rightarrow\ P=m(g+a)`,
+          ],
+        },
+      },
+      {
+        id: 'weight-elevator-down',
+        title: 'Вес в лифте, движущемся вниз с ускорением',
+        formula: String.raw`P=m(g-a)`,
+        notation: [DY.P, DY.m, DY.g, DY.a],
+        kind: 'consequence',
+        derivation: {
+          from: ['newton-second', 'weight'],
+          steps: [
+            String.raw`mg-N=ma\ \Rightarrow\ N=m(g-a)`,
+            String.raw`P=N\ \Rightarrow\ P=m(g-a)`,
+          ],
+        },
+      },
+      {
+        id: 'friction-rest-incline',
+        title: 'Трение покоя на наклонной плоскости',
+        formula: String.raw`F_{\text{тр}}=mg\sin\alpha`,
+        notation: [DY.Ftr, DY.m, DY.g, DY.alpha],
+        kind: 'consequence',
+        figure: 'incline-friction',
+        derivation: {
+          from: ['newton-second'],
+          steps: [
+            String.raw`mg\sin\alpha-F_{\text{тр}}=0\quad \text{при } a_x=0`,
+            String.raw`\Rightarrow\ F_{\text{тр}}=mg\sin\alpha`,
+          ],
+        },
+      },
+      {
+        id: 'rest-condition-incline',
+        title: 'Условие покоя на наклонной плоскости',
+        formula: String.raw`\operatorname{tg}\alpha\le\mu`,
+        notation: [DY.alpha, DY.mu],
+        kind: 'consequence',
+        figure: 'incline-friction',
+        derivation: {
+          from: ['friction-sliding', 'normal-incline', 'friction-rest-incline'],
+          steps: [
+            String.raw`F_{\text{тр}}\le\mu N`,
+            String.raw`F_{\text{тр}}=mg\sin\alpha,\quad N=mg\cos\alpha`,
+            String.raw`\Rightarrow\ \operatorname{tg}\alpha\le\mu`,
+          ],
+        },
+      },
+      {
+        id: 'incline-acceleration',
+        title: 'Ускорение при скольжении с наклонной плоскости',
+        formula: String.raw`a=g(\sin\alpha-\mu\cos\alpha)`,
+        notation: [DY.a, DY.g, DY.alpha, DY.mu],
+        kind: 'consequence',
+        figure: 'incline-acceleration',
+        derivation: {
+          from: ['newton-second', 'friction-sliding', 'normal-incline'],
+          steps: [
+            String.raw`ma=mg\sin\alpha-\mu N,\quad N=mg\cos\alpha`,
+            String.raw`\Rightarrow\ a=g(\sin\alpha-\mu\cos\alpha)`,
+          ],
+        },
+      },
+      {
+        id: 'centripetal-force',
+        title: 'Центростремительная сила',
+        formula: String.raw`F_{\text{ц}}=m\dfrac{v^2}{R}=m\omega^2R`,
+        notation: [DY.Fc, DY.m, DY.v, DY.R, DY.omega],
+        kind: 'consequence',
+        derivation: {
+          from: ['newton-second'],
+          steps: [
+            String.raw`F_{\text{ц}}=ma_{\text{ц}},\quad a_{\text{ц}}=\dfrac{v^2}{R}=\omega^2R`,
+            String.raw`\Rightarrow\ F_{\text{ц}}=m\dfrac{v^2}{R}=m\omega^2R`,
+          ],
+        },
+      },
+      {
+        id: 'kinetic-energy',
+        title: 'Кинетическая энергия',
+        formula: String.raw`E_{\text{к}}=\dfrac{mv^2}{2}`,
+        notation: [DY.Ek, DY.m, DY.v],
+        kind: 'definition',
+      },
+      {
+        id: 'potential-energy',
+        title: 'Потенциальная энергия',
+        formula: String.raw`E_{\text{п}}=mgh`,
+        notation: [DY.Ep, DY.m, DY.g, DY.h],
+        kind: 'definition',
+      },
+      {
+        id: 'mechanical-energy',
+        title: 'Полная механическая энергия',
+        formula: String.raw`E=E_{\text{к}}+E_{\text{п}}`,
+        notation: [DY.E, DY.Ek, DY.Ep],
+        kind: 'definition',
+      },
+      {
+        id: 'work-energy-theorem',
+        title: 'Теорема о кинетической энергии',
+        formula: String.raw`A=E_{\text{к}2}-E_{\text{к}1}`,
+        notation: [DY.A, DY.Ek1, DY.Ek2],
+        kind: 'consequence',
+        derivation: {
+          from: ['newton-second', 'kinetic-energy'],
+          steps: [
+            String.raw`A=Fs,\quad F=ma,\quad s=\dfrac{v_2^2-v_1^2}{2a}`,
+            String.raw`\Rightarrow\ A=\dfrac{mv_2^2}{2}-\dfrac{mv_1^2}{2}`,
+          ],
+        },
+      },
+      {
+        id: 'energy-conservation',
+        title: 'Закон сохранения механической энергии',
+        formula: String.raw`E_{\text{к}1}+E_{\text{п}1}=E_{\text{к}2}+E_{\text{п}2}`,
+        notation: [DY.Ek1, DY.Ep1, DY.Ek2, DY.Ep2],
+        kind: 'basis',
+      },
+      {
+        id: 'friction-heat',
+        title: 'Теплота при трении',
+        formula: String.raw`Q=F_{\text{тр}}s`,
+        notation: [DY.Q, DY.Ftr, DY.s],
+        kind: 'definition',
+      },
+      {
+        id: 'momentum',
+        title: 'Импульс тела',
+        formula: String.raw`\vec p=m\vec v`,
+        notation: [DY.p, DY.m, DY.v],
+        kind: 'definition',
+      },
+      {
+        id: 'impulse-of-force',
+        title: 'Импульс силы',
+        formula: String.raw`\vec J=\vec F\Delta t`,
+        notation: [DY.J, DY.Fplain, DY.dt],
+        kind: 'definition',
+      },
+      {
+        id: 'momentum-second-law',
+        title: 'Второй закон в импульсной форме',
+        formula: String.raw`\vec F\Delta t=\Delta\vec p`,
+        notation: [DY.Fplain, DY.dt, DY.dp],
+        kind: 'consequence',
+        derivation: {
+          from: ['newton-second', 'momentum'],
+          steps: [
+            String.raw`F\Delta t=m\Delta v`,
+            String.raw`\Delta\vec p=m\Delta\vec v\ \Rightarrow\ \vec F\Delta t=\Delta\vec p`,
+          ],
+        },
+      },
+      {
+        id: 'momentum-conservation',
+        title: 'Закон сохранения импульса',
+        formula: String.raw`\vec p_1+\vec p_2=\text{const}`,
+        notation: [DY.p1, DY.p2],
+        kind: 'basis',
+      },
+      {
+        id: 'momentum-two-bodies',
+        title: 'Закон сохранения импульса для двух тел',
+        formula: String.raw`m_1\vec v_1+m_2\vec v_2=m_1\vec v_1'+m_2\vec v_2'`,
+        notation: [DY.m1, DY.v1, DY.m2, DY.v2, DY.v1p, DY.v2p],
+        kind: 'consequence',
+        derivation: {
+          from: ['momentum-conservation', 'momentum'],
+          steps: [
+            String.raw`\vec p_1+\vec p_2=\text{const},\quad \vec p=m\vec v`,
+            String.raw`\Rightarrow\ m_1\vec v_1+m_2\vec v_2=m_1\vec v_1'+m_2\vec v_2'`,
+          ],
+        },
+      },
+      {
+        id: 'mechanical-work',
+        title: 'Работа постоянной силы',
+        formula: String.raw`A=Fs\cos\alpha`,
+        notation: [DY.A, DY.Fplain, DY.s, DY.alpha],
+        kind: 'definition',
+      },
+      {
+        id: 'power',
+        title: 'Мощность',
+        formula: String.raw`P=\dfrac{A}{t}`,
+        notation: [n('P', 'мощность, Вт'), DY.A, n('t', 'время, с')],
+        kind: 'definition',
+      },
+      {
+        id: 'gravity-work',
+        title: 'Работа силы тяжести',
+        formula: String.raw`A=mg(h_1-h_2)`,
+        notation: [DY.A, DY.m, DY.g, DY.h1, DY.h2],
+        kind: 'consequence',
+        derivation: {
+          from: ['mechanical-work', 'gravity-force'],
+          steps: [
+            String.raw`A=Fs\cos\alpha,\quad F=mg`,
+            String.raw`s\cos\alpha=h_1-h_2`,
+            String.raw`\Rightarrow\ A=mg(h_1-h_2)`,
+          ],
+        },
+      },
+      {
+        id: 'elastic-work',
+        title: 'Работа силы упругости',
+        formula: String.raw`A=-\dfrac{kx^2}{2}`,
+        notation: [DY.A, DY.k, DY.x],
+        kind: 'consequence',
+        derivation: {
+          from: ['mechanical-work'],
+          steps: [
+            String.raw`A\ \text{— площадь под графиком } F_x(x)`,
+            String.raw`F=kx\ \Rightarrow\ A=-\dfrac{kx^2}{2}`,
+          ],
+        },
+      },
+      {
+        id: 'friction-work',
+        title: 'Работа силы трения',
+        formula: String.raw`A=-F_{\text{тр}}s`,
+        notation: [DY.A, DY.Ftr, DY.s],
+        kind: 'consequence',
+        derivation: {
+          from: ['mechanical-work'],
+          steps: [
+            String.raw`A=Fs\cos\alpha,\quad \alpha=180^\circ`,
+            String.raw`\Rightarrow\ A=-F_{\text{тр}}s`,
+          ],
+        },
+      },
+      {
+        id: 'mechanism-efficiency',
+        title: 'КПД механизма',
+        formula: String.raw`\eta=\dfrac{A_{\text{п}}}{A_{\text{з}}}\cdot100\%`,
+        notation: [DY.eta, DY.Ap, DY.Az],
+        kind: 'definition',
       },
     ],
   },

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { cardById, type Card } from '../content/sections';
 import type { Answer } from '../domain/scheduler';
 import { CardMode } from '../components/CardMode';
+import { CardFigure } from '../components/CardFigure';
 import { Formula, InlineFormula } from '../components/Formula';
 import { NotationList } from '../components/NotationList';
 import { noBreakDash } from '../ui/format';
@@ -68,6 +69,8 @@ export function SessionScreen({
           {revealed && (
             <div className="card__answer">
               <Formula latex={card.formula} />
+
+              {card.figure && <CardFigure id={card.figure} />}
 
               {card.extra && (
                 <ul className="extra">
