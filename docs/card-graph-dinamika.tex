@@ -1,0 +1,114 @@
+\documentclass[a4paper,landscape]{article}
+
+% Черновик графа формул. Источник — physics/cheatsheets/09-dinamika.tex.
+
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{tempora}
+\usepackage[a4paper,landscape,left=12mm,right=12mm,top=12mm,bottom=12mm]{geometry}
+\usepackage{array,booktabs,longtable}
+\usepackage{ragged2e}
+\usepackage[table]{xcolor}
+
+\definecolor{rule}{HTML}{C9CDC7}
+\arrayrulecolor{rule}
+\renewcommand{\arraystretch}{1.25}
+\setlength{\parindent}{0pt}
+\setlength{\tabcolsep}{0pt}
+
+\begin{document}
+
+{\LARGE\bfseries Динамика. Законы сохранения}\par
+\vspace{1mm}
+{\large Черновик графа формул}\par
+\vspace{2mm}
+{\footnotesize
+\textbf{Тип}: определение — язык и определения величин; основа — принимаем без вывода;
+следствие — выводится из карточек с номерами из столбца «Из чего».
+У определения в шагах может быть равносильная запись, у основы — подсказка.
+Шаги — черновик, правьте формулы и текст. Номера — из первого столбца.
+Всего карточек: 33.}\par
+\vspace{4mm}
+
+\begin{longtable}{@{}>{\RaggedRight\arraybackslash}p{7mm}@{\hspace{3mm}}>{\RaggedRight\arraybackslash}p{58mm}@{\hspace{3mm}}>{\RaggedRight\hyphenpenalty=10000\arraybackslash}p{58mm}@{\hspace{3mm}}>{\RaggedRight\arraybackslash}p{24mm}@{\hspace{3mm}}>{\RaggedRight\arraybackslash}p{35mm}@{\hspace{3mm}}>{\RaggedRight\arraybackslash}p{76mm}@{}}
+\toprule
+\textbf{№} & \textbf{Формула} & \textbf{Название} & \textbf{Тип} & \textbf{Из чего} & \textbf{Шаги} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{№} & \textbf{Формула} & \textbf{Название} & \textbf{Тип} & \textbf{Из чего} & \textbf{Шаги} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+1 & $\displaystyle \sum_i\vec F_i=0$ & Первый закон Ньютона & основа & — & — \\
+\midrule
+2 & $\displaystyle \vec F=m\vec a$ & Второй закон Ньютона & основа & — & — \\
+\midrule
+3 & $\displaystyle \vec F_{12}=-\vec F_{21}$ & Третий закон Ньютона & основа & — & — \\
+\midrule
+4 & $\displaystyle F_{\text{т}}=mg$ & Сила тяжести & определение & — & — \\
+\midrule
+5 & $\displaystyle F_{\text{упр}}=k\Delta l$ & Закон Гука & основа & — & — \\
+\midrule
+6 & $\displaystyle F_{\text{тр}}=\mu N$ & Сила трения скольжения & основа & — & — \\
+\midrule
+7 & $\displaystyle P=N$ & Вес тела & определение & — & — \\
+\midrule
+8 & $\displaystyle P=mg$ & Вес в покое на горизонтальной опоре & следствие & 2, 7 & $a=0\ \Rightarrow\ N=mg$ (2)\newline $P=N$ (7) $\Rightarrow\ P=mg$ \\
+\midrule
+9 & $\displaystyle N=mg\cos\alpha$ & Сила нормальной реакции на наклонной плоскости & следствие & 2 & $Oy$: $N-mg\cos\alpha=0$ при $a_y=0$ (2)\newline $\Rightarrow\ N=mg\cos\alpha$ \\
+\midrule
+10 & $\displaystyle P=m(g+a)$ & Вес в лифте, движущемся вверх с ускорением & следствие & 2, 7 & $N-mg=ma$ (2) $\Rightarrow\ N=m(g+a)$\newline $P=N$ (7) $\Rightarrow\ P=m(g+a)$ \\
+\midrule
+11 & $\displaystyle P=m(g-a)$ & Вес в лифте, движущемся вниз с ускорением & следствие & 2, 7 & $mg-N=ma$ (2) $\Rightarrow\ N=m(g-a)$\newline $P=N$ (7) $\Rightarrow\ P=m(g-a)$ \\
+\midrule
+12 & $\displaystyle F_{\text{тр}}=mg\sin\alpha$ & Трение покоя на наклонной плоскости & следствие & 2 & $Ox$: $mg\sin\alpha-F_{\text{тр}}=0$ при $a_x=0$ (2)\newline $\Rightarrow\ F_{\text{тр}}=mg\sin\alpha$ \\
+\midrule
+13 & $\displaystyle \operatorname{tg}\alpha\le\mu$ & Условие покоя на наклонной плоскости & следствие & 6, 9, 12 & $F_{\text{тр}}\le\mu N$ (6), $F_{\text{тр}}=mg\sin\alpha$ (12), $N=mg\cos\alpha$ (9)\newline $\Rightarrow\ \operatorname{tg}\alpha\le\mu$ \\
+\midrule
+14 & $\displaystyle a=g(\sin\alpha-\mu\cos\alpha)$ & Ускорение при скольжении с наклонной плоскости & следствие & 2, 6, 9 & $ma=mg\sin\alpha-\mu N$ (2, 6), $N=mg\cos\alpha$ (9)\newline $\Rightarrow\ a=g(\sin\alpha-\mu\cos\alpha)$ \\
+\midrule
+15 & $\displaystyle F_{\text{ц}}=m\dfrac{v^2}{R}=m\omega^2R$ & Центростремительная сила & следствие & 2 & $F_{\text{ц}}=ma_{\text{ц}}$ (2), $a_{\text{ц}}=\dfrac{v^2}{R}=\omega^2R$\newline $\Rightarrow\ F_{\text{ц}}=m\dfrac{v^2}{R}=m\omega^2R$ \\
+\midrule
+16 & $\displaystyle E_{\text{к}}=\dfrac{mv^2}{2}$ & Кинетическая энергия & определение & — & — \\
+\midrule
+17 & $\displaystyle E_{\text{п}}=mgh$ & Потенциальная энергия & определение & — & — \\
+\midrule
+18 & $\displaystyle E=E_{\text{к}}+E_{\text{п}}$ & Полная механическая энергия & определение & — & — \\
+\midrule
+19 & $\displaystyle A=E_{\text{к}2}-E_{\text{к}1}$ & Теорема о кинетической энергии & следствие & 2, 16 & $F=ma$ (2), $s=\dfrac{v_2^2-v_1^2}{2a}$\newline $A=Fs=\dfrac{mv_2^2}{2}-\dfrac{mv_1^2}{2}$ (16) \\
+\midrule
+20 & $\displaystyle E_{\text{к}1}+E_{\text{п}1}=E_{\text{к}2}+E_{\text{п}2}$ & Закон сохранения механической энергии & основа & — & — \\
+\midrule
+21 & $\displaystyle Q=F_{\text{тр}}s$ & Теплота при трении & определение & — & — \\
+\midrule
+22 & $\displaystyle \vec p=m\vec v$ & Импульс тела & определение & — & — \\
+\midrule
+23 & $\displaystyle \vec F\Delta t$ & Импульс силы & определение & — & — \\
+\midrule
+24 & $\displaystyle \vec F\Delta t=\Delta\vec p$ & Второй закон в импульсной форме & следствие & 2, 22 & $F\Delta t=m\Delta v$ (2)\newline $\Delta\vec p=m\Delta\vec v$ (22) $\Rightarrow\ \vec F\Delta t=\Delta\vec p$ \\
+\midrule
+25 & $\displaystyle \vec p_1+\vec p_2=\text{const}$ & Закон сохранения импульса & основа & — & — \\
+\midrule
+26 & $\displaystyle m_1\vec v_1+m_2\vec v_2=m_1\vec v_1'+m_2\vec v_2'$ & Закон сохранения импульса для двух тел & следствие & 25 & $\vec p_1+\vec p_2=\text{const}$ (25), $\vec p=m\vec v$ (22)\newline $\Rightarrow\ m_1\vec v_1+m_2\vec v_2=m_1\vec v_1'+m_2\vec v_2'$ \\
+\midrule
+27 & $\displaystyle A=Fs\cos\alpha$ & Работа постоянной силы & определение & — & — \\
+\midrule
+28 & $\displaystyle P=\dfrac{A}{t}$ & Мощность & определение & — & — \\
+\midrule
+29 & $\displaystyle A=mg(h_1-h_2)$ & Работа силы тяжести & следствие & 27 & $A=Fs\cos\alpha$ (27), $F=mg$ (4), $s\cos\alpha=h_1-h_2$\newline $\Rightarrow\ A=mg(h_1-h_2)$ \\
+\midrule
+30 & $\displaystyle A=-\dfrac{kx^2}{2}$ & Работа силы упругости & следствие & 27 & $A$ — площадь под графиком $F_x(x)$ (27)\newline при $F=kx$: $A=-\dfrac{kx^2}{2}$ \\
+\midrule
+31 & $\displaystyle A=-F_{\text{тр}}s$ & Работа силы трения & следствие & 27 & $A=Fs\cos\alpha$ (27), $\alpha=180^\circ$\newline $\Rightarrow\ A=-F_{\text{тр}}s$ \\
+\midrule
+32 & $\displaystyle \eta=\dfrac{A_{\text{п}}}{A_{\text{з}}}\cdot100\%$ & КПД механизма & определение & — & — \\
+\midrule
+33 & $\displaystyle \eta=\dfrac{mgh}{Fl}\cdot100\%$ & КПД наклонной плоскости & следствие & 32 & $A_{\text{п}}=mgh$, $A_{\text{з}}=Fl$ (32)\newline $\Rightarrow\ \eta=\dfrac{mgh}{Fl}\cdot100\%$ \\
+\end{longtable}
+
+\end{document}
