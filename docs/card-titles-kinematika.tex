@@ -1,0 +1,120 @@
+\documentclass[10pt,a4paper]{article}
+
+% Черновик для правки названий. Кинематика.
+
+% ---------- шрифты и язык ----------
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{tempora}
+
+% ---------- поля ----------
+\usepackage[a4paper,left=14mm,right=14mm,top=14mm,bottom=14mm]{geometry}
+
+% ---------- таблицы ----------
+\usepackage{array,booktabs,longtable}
+\usepackage{ragged2e}
+\usepackage[table]{xcolor}
+
+\definecolor{rule}{HTML}{C9CDC7}
+\arrayrulecolor{rule}
+\renewcommand{\arraystretch}{1.5}
+\setlength{\parindent}{0pt}
+\flushbottom
+
+\begin{document}
+
+{\LARGE\bfseries Кинематика}\par
+\vspace{2mm}
+{\large Названия карточек}\par
+\vspace{3mm}
+{\small Формулы перенесены из шпаргалки \texttt{09-kinematika.tex}.
+Правьте второй столбец; формулы тоже можно менять.}\par
+\vspace{6mm}
+
+\begin{longtable}{@{}>{\RaggedRight\arraybackslash}p{0.46\linewidth}@{\hspace{8mm}}>{\RaggedRight\arraybackslash}p{0.46\linewidth}@{}}
+\toprule
+\textbf{Формула} & \textbf{Название карточки} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Формула} & \textbf{Название карточки} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+$\displaystyle c_x=c\cos\alpha,\quad c_y=c\sin\alpha$ & Проекции вектора на оси \\
+\addlinespace[2mm]
+$\displaystyle c=\sqrt{c_x^2+c_y^2},\quad \operatorname{tg}\alpha=\dfrac{c_y}{c_x}$ & Модуль вектора и угол \\
+\midrule
+\addlinespace[2mm]
+$\displaystyle \vec v=\dfrac{\Delta\vec r}{\Delta t}$ & Мгновенная скорость \\
+\addlinespace[2mm]
+$\displaystyle \langle\vec v\rangle=\dfrac{\Delta\vec r}{\Delta t}$ & Средняя скорость перемещения \\
+\addlinespace[2mm]
+$\displaystyle \langle v\rangle=\dfrac{s}{\Delta t}$ & Средняя путевая скорость \\
+\midrule
+\addlinespace[2mm]
+$\displaystyle \vec a=\dfrac{\Delta\vec v}{\Delta t}$ & Ускорение \\
+\midrule
+\addlinespace[2mm]
+$\displaystyle \Delta\vec r_{\text{абс}}=\Delta\vec r_{\text{отн}}+\Delta\vec r_{\text{пер}}$ & Закон сложения перемещений \\
+\addlinespace[2mm]
+$\displaystyle \vec v_{\text{абс}}=\vec v_{\text{отн}}+\vec v_{\text{пер}}$ & Закон сложения скоростей \\
+\addlinespace[2mm]
+$\displaystyle \vec a_{\text{абс}}=\vec a_{\text{отн}}+\vec a_{\text{пер}}$ & Закон сложения ускорений \\
+\midrule
+\addlinespace[2mm]
+$\displaystyle \vec v=\vec v_0+\vec a t$\newline
+$\displaystyle \vec r=\vec r_0+\vec v_0 t+\dfrac{\vec a t^2}{2}$ & Кинематические уравнения \\
+\addlinespace[2mm]
+$\displaystyle \text{Ox: } a_x=\text{const}$\newline
+$\displaystyle v_x=v_{0x}+a_x t$\newline
+$\displaystyle x=x_0+v_{0x}t+\dfrac{a_x t^2}{2}$\newline
+$\displaystyle \text{Oy: } a_y=\text{const}$\newline
+$\displaystyle v_y=v_{0y}+a_y t$\newline
+$\displaystyle y=y_0+v_{0y}t+\dfrac{a_y t^2}{2}$ & Кинематические уравнения (в проекциях) \\
+\addlinespace[2mm]
+$\displaystyle \Delta r_x=\dfrac{v_x^2-v_{0x}^2}{2a_x}$ & Перемещение (без времени) \\
+\addlinespace[2mm]
+$\displaystyle \Delta r_x=\dfrac{v_{0x}+v_x}{2}\,t$ & Перемещение (через среднюю скорость) \\
+\midrule
+\addlinespace[2mm]
+$\displaystyle \text{Ox: } a_x=0$\newline
+$\displaystyle v_x=v_0\cos\alpha$\newline
+$\displaystyle x=x_0+v_0\cos\alpha\,t$\newline
+$\displaystyle \text{Oy: } a_y=-g$\newline
+$\displaystyle v_y=v_0\sin\alpha-gt$\newline
+$\displaystyle y=y_0+v_0\sin\alpha\,t-\dfrac{g t^2}{2}$ & Движение под углом к горизонту \\
+\addlinespace[2mm]
+$\displaystyle t_{\text{под}}=\dfrac{v_{0y}}{g}$ & Время подъема \\
+\addlinespace[2mm]
+$\displaystyle H=y_0+\dfrac{v_{0y}^2}{2g}$ & Высота подъема \\
+\addlinespace[2mm]
+$\displaystyle t_{\text{пад}}=\sqrt{\dfrac{2H}{g}}$ & Время падения \\
+\addlinespace[2mm]
+$\displaystyle L=\dfrac{v_0^2\sin 2\alpha}{g}$ & Дальность полета \\
+\midrule
+\addlinespace[2mm]
+$\displaystyle s=R\Delta\varphi$ & Длина дуги окружности \\
+\addlinespace[2mm]
+$\displaystyle \omega=\dfrac{\Delta\varphi}{\Delta t}$ & Угловая скорость \\
+\addlinespace[2mm]
+$\displaystyle \omega=\dfrac{2\pi}{T}$ & Угловая скорость (через период) \\
+\addlinespace[2mm]
+$\displaystyle \omega=2\pi\nu$ & Угловая скорость (через частоту) \\
+\addlinespace[2mm]
+$\displaystyle \nu=\dfrac{1}{T}$ & Частота и период \\
+\addlinespace[2mm]
+$\displaystyle v=\omega R$ & Линейная скорость \\
+\addlinespace[2mm]
+$\displaystyle a=\dfrac{v^2}{R}=\omega^2 R$ & Центростремительное ускорение \\
+\addlinespace[2mm]
+\end{longtable}
+
+\vspace{4mm}
+{\footnotesize Всего карточек: 25.}
+
+\end{document}

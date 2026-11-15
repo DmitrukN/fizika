@@ -1,0 +1,98 @@
+\documentclass[a4paper,landscape]{article}
+
+% Черновик графа формул. Источник — docs/card-titles-kinematika.tex.
+
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{tempora}
+\usepackage[a4paper,landscape,left=12mm,right=12mm,top=12mm,bottom=12mm]{geometry}
+\usepackage{array,booktabs,longtable}
+\usepackage{ragged2e}
+\usepackage[table]{xcolor}
+
+\definecolor{rule}{HTML}{C9CDC7}
+\arrayrulecolor{rule}
+\renewcommand{\arraystretch}{1.25}
+\setlength{\parindent}{0pt}
+\setlength{\tabcolsep}{0pt}
+
+\begin{document}
+
+{\LARGE\bfseries Кинематика}\par
+\vspace{1mm}
+{\large Черновик графа формул}\par
+\vspace{2mm}
+{\footnotesize
+\textbf{Тип}: определение — язык и определения величин; основа — принимаем без вывода;
+следствие — выводится из карточек с номерами из столбца «Из чего».
+У определения в шагах может быть равносильная запись, у основы — подсказка.
+Шаги — черновик, правьте формулы и текст. Номера — из первого столбца.
+Всего карточек: 25.}\par
+\vspace{4mm}
+
+\begin{longtable}{@{}>{\RaggedRight\arraybackslash}p{7mm}@{\hspace{3mm}}>{\RaggedRight\arraybackslash}p{58mm}@{\hspace{3mm}}>{\RaggedRight\hyphenpenalty=10000\arraybackslash}p{58mm}@{\hspace{3mm}}>{\RaggedRight\arraybackslash}p{24mm}@{\hspace{3mm}}>{\RaggedRight\arraybackslash}p{35mm}@{\hspace{3mm}}>{\RaggedRight\arraybackslash}p{76mm}@{}}
+\toprule
+\textbf{№} & \textbf{Формула} & \textbf{Название} & \textbf{Тип} & \textbf{Из чего} & \textbf{Шаги} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{№} & \textbf{Формула} & \textbf{Название} & \textbf{Тип} & \textbf{Из чего} & \textbf{Шаги} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+1 & $\displaystyle c_x=c\cos\alpha,\quad c_y=c\sin\alpha$ & Проекции вектора на оси & определение & — & — \\
+\midrule
+2 & $\displaystyle c=\sqrt{c_x^2+c_y^2},\quad \operatorname{tg}\alpha=\dfrac{c_y}{c_x}$ & Модуль вектора и угол & следствие & 1 & из (1): $\dfrac{c_y}{c_x}=\dfrac{c\sin\alpha}{c\cos\alpha}=\operatorname{tg}\alpha$\newline $c=\sqrt{c_x^2+c_y^2}$ — теорема Пифагора \\
+\midrule
+3 & $\displaystyle \vec v=\dfrac{\Delta\vec r}{\Delta t}$ & Мгновенная скорость & определение & — & — \\
+\midrule
+4 & $\displaystyle \langle\vec v\rangle=\dfrac{\Delta\vec r}{\Delta t}$ & Средняя скорость перемещения & определение & — & — \\
+\midrule
+5 & $\displaystyle \langle v\rangle=\dfrac{s}{\Delta t}$ & Средняя путевая скорость & определение & — & — \\
+\midrule
+6 & $\displaystyle \vec a=\dfrac{\Delta\vec v}{\Delta t}$ & Ускорение & определение & — & — \\
+\midrule
+7 & $\displaystyle \Delta\vec r_{\text{абс}}=\Delta\vec r_{\text{отн}}+\Delta\vec r_{\text{пер}}$ & Закон сложения перемещений & основа & — & — \\
+\midrule
+8 & $\displaystyle \vec v_{\text{абс}}=\vec v_{\text{отн}}+\vec v_{\text{пер}}$ & Закон сложения скоростей & следствие & 7, 3 & $\vec v=\dfrac{\Delta\vec r}{\Delta t}$ (3), $\Delta\vec r_{\text{абс}}=\Delta\vec r_{\text{отн}}+\Delta\vec r_{\text{пер}}$ (7)\newline $\Rightarrow\ \vec v_{\text{абс}}=\vec v_{\text{отн}}+\vec v_{\text{пер}}$ \\
+\midrule
+9 & $\displaystyle \vec a_{\text{абс}}=\vec a_{\text{отн}}+\vec a_{\text{пер}}$ & Закон сложения ускорений & следствие & 8, 6 & $\vec a=\dfrac{\Delta\vec v}{\Delta t}$ (6), $\vec v_{\text{абс}}=\vec v_{\text{отн}}+\vec v_{\text{пер}}$ (8)\newline $\Rightarrow\ \vec a_{\text{абс}}=\vec a_{\text{отн}}+\vec a_{\text{пер}}$ \\
+\midrule
+10 & $\displaystyle \vec v=\vec v_0+\vec a t$\newline $\displaystyle \vec r=\vec r_0+\vec v_0t+\dfrac{\vec a t^2}{2}$ & Кинематические уравнения & основа & — & — \\
+\midrule
+11 & $\displaystyle \text{Ox: } a_x=\text{const}$\newline $\displaystyle v_x=v_{0x}+a_xt$\newline $\displaystyle x=x_0+v_{0x}t+\dfrac{a_xt^2}{2}$\newline $\displaystyle \text{Oy: } a_y=\text{const}$\newline $\displaystyle v_y=v_{0y}+a_yt$\newline $\displaystyle y=y_0+v_{0y}t+\dfrac{a_yt^2}{2}$ & Кинематические уравнения (в проекциях) & следствие & 10 & проекция (10) на Ox:\newline $v_x=v_{0x}+a_xt,\quad x=x_0+v_{0x}t+\dfrac{a_xt^2}{2}$\newline на Oy — те же формулы с индексом $y$ \\
+\midrule
+12 & $\displaystyle \Delta r_x=\dfrac{v_x^2-v_{0x}^2}{2a_x}$ & Перемещение (без времени) & следствие & 11 & $t=\dfrac{v_x-v_{0x}}{a_x}$ из $v_x=v_{0x}+a_xt$ (11)\newline $\Delta r_x=v_{0x}t+\dfrac{a_xt^2}{2}$ (11) $\Rightarrow\ \Delta r_x=\dfrac{v_x^2-v_{0x}^2}{2a_x}$ \\
+\midrule
+13 & $\displaystyle \Delta r_x=\dfrac{v_{0x}+v_x}{2}\,t$ & Перемещение (через среднюю скорость) & следствие & 11 & $\Delta r_x=v_{0x}t+\dfrac{a_xt^2}{2}$ (11), $a_xt=v_x-v_{0x}$ (11)\newline $\Rightarrow\ \Delta r_x=\left(v_{0x}+\dfrac{v_x-v_{0x}}{2}\right)t=\dfrac{v_{0x}+v_x}{2}t$ \\
+\midrule
+14 & $\displaystyle \text{Ox: } a_x=0$\newline $\displaystyle v_x=v_0\cos\alpha$\newline $\displaystyle x=x_0+v_0\cos\alpha\,t$\newline $\displaystyle \text{Oy: } a_y=-g$\newline $\displaystyle v_y=v_0\sin\alpha-gt$\newline $\displaystyle y=y_0+v_0\sin\alpha\,t-\dfrac{gt^2}{2}$ & Движение под углом к горизонту & следствие & 11 & $a_x=0$, $a_y=-g$, $v_{0x}=v_0\cos\alpha$, $v_{0y}=v_0\sin\alpha$ в (11)\newline $\Rightarrow\ v_x=v_0\cos\alpha,\quad v_y=v_0\sin\alpha-gt$\newline $\Rightarrow\ x=x_0+v_0\cos\alpha\,t,\quad y=y_0+v_0\sin\alpha\,t-\dfrac{gt^2}{2}$ \\
+\midrule
+15 & $\displaystyle t_{\text{под}}=\dfrac{v_{0y}}{g}$ & Время подъема & следствие & 14 & $v_y=v_0\sin\alpha-gt$ (14), в вершине $v_y=0$\newline $\Rightarrow\ t_{\text{под}}=\dfrac{v_{0y}}{g}$ \\
+\midrule
+16 & $\displaystyle H=y_0+\dfrac{v_{0y}^2}{2g}$ & Высота подъема & следствие & 12 & $\Delta r_y=\dfrac{v_y^2-v_{0y}^2}{2a_y}$ (12), $v_y=0$, $a_y=-g$\newline $\Rightarrow\ H=y_0+\dfrac{v_{0y}^2}{2g}$ \\
+\midrule
+17 & $\displaystyle t_{\text{пад}}=\sqrt{\dfrac{2H}{g}}$ & Время падения & следствие & 14 & $y=H-\dfrac{gt^2}{2}$ (14), при $y=0$\newline $\Rightarrow\ t_{\text{пад}}=\sqrt{\dfrac{2H}{g}}$ \\
+\midrule
+18 & $\displaystyle L=\dfrac{v_0^2\sin 2\alpha}{g}$ & Дальность полета & следствие & 14, 15, 17 & $L=v_{0x}(t_{\text{под}}+t_{\text{пад}})$ (14)\newline при $y_0=0$: $t_{\text{пад}}=t_{\text{под}}=\dfrac{v_0\sin\alpha}{g}$ (15, 17)\newline $\Rightarrow\ L=v_0\cos\alpha\cdot\dfrac{2v_0\sin\alpha}{g}=\dfrac{v_0^2\sin 2\alpha}{g}$ \\
+\midrule
+19 & $\displaystyle s=R\Delta\varphi$ & Длина дуги окружности & определение & — & — \\
+\midrule
+20 & $\displaystyle \omega=\dfrac{\Delta\varphi}{\Delta t}$ & Угловая скорость & определение & — & — \\
+\midrule
+21 & $\displaystyle \omega=\dfrac{2\pi}{T}$ & Угловая скорость (через период) & следствие & 20 & $\omega=\dfrac{\Delta\varphi}{\Delta t}$ (20), один оборот: $\Delta\varphi=2\pi$, $\Delta t=T$\newline $\Rightarrow\ \omega=\dfrac{2\pi}{T}$ \\
+\midrule
+22 & $\displaystyle \omega=2\pi\nu$ & Угловая скорость (через частоту) & следствие & 21, 23 & $\omega=\dfrac{2\pi}{T}$ (21), $\nu=\dfrac{1}{T}$ (23)\newline $\Rightarrow\ \omega=2\pi\nu$ \\
+\midrule
+23 & $\displaystyle \nu=\dfrac{1}{T}$ & Частота и период & определение & — & — \\
+\midrule
+24 & $\displaystyle v=\omega R$ & Линейная скорость & следствие & 19, 20 & $s=R\Delta\varphi$ (19), $\omega=\dfrac{\Delta\varphi}{\Delta t}$ (20)\newline $v=\dfrac{s}{\Delta t}=R\dfrac{\Delta\varphi}{\Delta t}=\omega R$ \\
+\midrule
+25 & $\displaystyle a=\dfrac{v^2}{R}=\omega^2R$ & Центростремительное ускорение & следствие & 6, 24 & $a=\dfrac{\Delta v}{\Delta t}$ (6), при повороте на $\Delta\varphi$: $|\Delta\vec v|\approx v\Delta\varphi$\newline $a=\dfrac{v\Delta\varphi}{\Delta t}=v\omega=\dfrac{v^2}{R}$ (24) \\
+\end{longtable}
+
+\end{document}
