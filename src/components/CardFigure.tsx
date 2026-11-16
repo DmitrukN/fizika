@@ -177,7 +177,7 @@ export function CardFigure({
           y
         </text>
 
-        <g transform="translate(133.6 101.7) rotate(-26.57)">
+        <g transform="translate(144.1 97.7) rotate(-26.57)">
           <rect
             x="-22"
             y="-11"
@@ -190,93 +190,93 @@ export function CardFigure({
           />
         </g>
 
-        {/* силы из центра бруска: mg 42, N = mg cos α 42, Fтр 24 */}
+        {/* силы из центра бруска: mg 52, N = mg cos α 46, Fтр 32 */}
         <line
-          x1="133.6"
-          y1="101.7"
-          x2="133.6"
-          y2="143.7"
+          x1="144.1"
+          y1="97.7"
+          x2="144.1"
+          y2="149.7"
           stroke={INK}
           strokeWidth="1.4"
           markerEnd="url(#fig-ink)"
         />
         <line
-          x1="147"
-          y1="145"
-          x2="156"
-          y2="145"
+          x1="158"
+          y1="131"
+          x2="167"
+          y2="131"
           stroke={INK}
           strokeWidth="0.9"
           markerEnd="url(#vec-ink)"
         />
-        <text x="139" y="156" fontSize="11" fill={INK}>
+        <text x="150" y="142" fontSize="11" fill={INK}>
           mg
         </text>
 
         <line
-          x1="133.6"
-          y1="101.7"
-          x2="114.8"
-          y2="64.1"
+          x1="144.1"
+          y1="97.7"
+          x2="123.5"
+          y2="56.6"
           stroke={GREEN}
           strokeWidth="1.6"
           markerEnd="url(#fig-green)"
         />
         <line
-          x1="103"
-          y1="50"
-          x2="111"
-          y2="50"
+          x1="111"
+          y1="42"
+          x2="120"
+          y2="42"
           stroke={GREEN}
           strokeWidth="0.9"
           markerEnd="url(#vec-green)"
         />
-        <text x="110" y="61" fontSize="11" fill={GREEN} textAnchor="end">
+        <text x="119" y="53" fontSize="11" fill={GREEN} textAnchor="end">
           N
         </text>
 
         <line
-          x1="133.6"
-          y1="101.7"
-          x2="160.4"
-          y2="88.3"
+          x1="144.1"
+          y1="97.7"
+          x2="172.7"
+          y2="83.4"
           stroke={RED}
           strokeWidth="1.6"
           markerEnd="url(#fig-red)"
         />
         <line
-          x1="163"
-          y1="73"
-          x2="172"
-          y2="73"
+          x1="175"
+          y1="68"
+          x2="184"
+          y2="68"
           stroke={RED}
           strokeWidth="0.9"
           markerEnd="url(#vec-red)"
         />
-        <text x="164" y="84" fontSize="11" fill={RED}>
+        <text x="176" y="79" fontSize="11" fill={RED}>
           F<tspan fontSize="8" dy="3">тр</tspan>
         </text>
 
         {/* ускорение рядом с бруском, не касаясь его */}
         <line
-          x1="100"
-          y1="109"
-          x2="78.5"
-          y2="119.7"
+          x1="118"
+          y1="100"
+          x2="96.5"
+          y2="110.7"
           stroke={BLUE}
           strokeWidth="1.6"
           markerEnd="url(#fig-blue)"
         />
         <line
-          x1="67"
+          x1="77"
           y1="122"
-          x2="75"
+          x2="85"
           y2="122"
           stroke={BLUE}
           strokeWidth="0.9"
           markerEnd="url(#vec-blue)"
         />
-        <text x="74" y="133" fontSize="11" fill={BLUE} textAnchor="end">
+        <text x="84" y="133" fontSize="11" fill={BLUE} textAnchor="end">
           a
         </text>
       </svg>
