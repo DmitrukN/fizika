@@ -163,24 +163,25 @@ function Projectile() {
   return (
     <svg viewBox="0 0 300 170" role="img" aria-label="Бросок под углом к горизонту">
       <Defs />
-      <line x1="25" y1="150" x2="288" y2="150" stroke={MUTED} strokeWidth="1" markerEnd="url(#fig-axis)" />
-      <text x="291" y="154" fontSize="10" fill={MUTED}>x</text>
-      <line x1="25" y1="150" x2="25" y2="16" stroke={MUTED} strokeWidth="1" markerEnd="url(#fig-axis)" />
-      <text x="21" y="13" fontSize="10" fill={MUTED} textAnchor="end">y</text>
+      <line x1="25" y1="150" x2="289" y2="150" stroke={MUTED} strokeWidth="1" markerEnd="url(#fig-axis)" />
+      <text x="292" y="154" fontSize="10" fill={MUTED}>x</text>
+      <line x1="30" y1="150" x2="30" y2="16" stroke={MUTED} strokeWidth="1" markerEnd="url(#fig-axis)" />
+      <text x="26" y="13" fontSize="10" fill={MUTED} textAnchor="end">y</text>
 
-      <path d="M25 150 Q155 -40 285 150" fill="none" stroke={INK} strokeWidth="1.4" />
-      <line x1="25" y1="150" x2="72" y2="112" stroke={INK} strokeWidth="1.4" markerEnd="url(#fig-ink)" />
-      <text x="64" y="106" fontSize="11" fill={INK}>v₀</text>
+      {/* парабола с начальным наклоном 45°: касательная совпадает с v₀ */}
+      <path d="M30 150 Q155 25 280 150" fill="none" stroke={INK} strokeWidth="1.4" />
+      <line x1="30" y1="150" x2="65" y2="115" stroke={INK} strokeWidth="1.4" markerEnd="url(#fig-ink)" />
+      <text x="67" y="110" fontSize="11" fill={INK}>v₀</text>
 
-      <path d="M55 150 A30 30 0 0 1 46.2 128.8" fill="none" stroke={MUTED} strokeWidth="0.9" />
-      <text x="58" y="140" fontSize="11" fill={MUTED}>α</text>
+      <path d="M62 150 A32 32 0 0 1 52.6 127.4" fill="none" stroke={MUTED} strokeWidth="0.9" />
+      <text x="66" y="143" fontSize="11" fill={MUTED}>α</text>
 
-      <line x1="155" y1="55" x2="155" y2="150" stroke={MUTED} strokeWidth="0.9" strokeDasharray="4 3" />
-      <text x="160" y="106" fontSize="11" fill={MUTED}>H</text>
+      <line x1="155" y1="87.5" x2="155" y2="150" stroke={MUTED} strokeWidth="0.9" strokeDasharray="4 3" />
+      <text x="160" y="122" fontSize="11" fill={MUTED}>H</text>
 
-      <line x1="25" y1="158" x2="285" y2="158" stroke={MUTED} strokeWidth="0.9" />
-      <line x1="25" y1="154" x2="25" y2="162" stroke={MUTED} strokeWidth="0.9" />
-      <line x1="285" y1="154" x2="285" y2="162" stroke={MUTED} strokeWidth="0.9" />
+      <line x1="30" y1="158" x2="280" y2="158" stroke={MUTED} strokeWidth="0.9" />
+      <line x1="30" y1="154" x2="30" y2="162" stroke={MUTED} strokeWidth="0.9" />
+      <line x1="280" y1="154" x2="280" y2="162" stroke={MUTED} strokeWidth="0.9" />
       <text x="155" y="168" fontSize="11" fill={MUTED} textAnchor="middle">L</text>
     </svg>
   );
