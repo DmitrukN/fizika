@@ -79,6 +79,50 @@ export function CardFigure({
           >
             <path d="M0 0 L10 5 L0 10 Z" fill={MUTED} />
           </marker>
+          <marker
+            id="vec-ink"
+            viewBox="0 0 10 10"
+            refX="9.5"
+            refY="5"
+            markerWidth="3.4"
+            markerHeight="3.4"
+            orient="auto"
+          >
+            <path d="M0 0 L10 5 L0 10 Z" fill={INK} />
+          </marker>
+          <marker
+            id="vec-green"
+            viewBox="0 0 10 10"
+            refX="9.5"
+            refY="5"
+            markerWidth="3.4"
+            markerHeight="3.4"
+            orient="auto"
+          >
+            <path d="M0 0 L10 5 L0 10 Z" fill={GREEN} />
+          </marker>
+          <marker
+            id="vec-red"
+            viewBox="0 0 10 10"
+            refX="9.5"
+            refY="5"
+            markerWidth="3.4"
+            markerHeight="3.4"
+            orient="auto"
+          >
+            <path d="M0 0 L10 5 L0 10 Z" fill={RED} />
+          </marker>
+          <marker
+            id="vec-blue"
+            viewBox="0 0 10 10"
+            refX="9.5"
+            refY="5"
+            markerWidth="3.4"
+            markerHeight="3.4"
+            orient="auto"
+          >
+            <path d="M0 0 L10 5 L0 10 Z" fill={BLUE} />
+          </marker>
         </defs>
 
         <path
@@ -146,7 +190,7 @@ export function CardFigure({
           />
         </g>
 
-        {/* mg 42; N = mg cos α 42; a 26; Fтр 17 */}
+        {/* силы из центра бруска: mg 42, N = mg cos α 42, Fтр 24 */}
         <line
           x1="133.6"
           y1="101.7"
@@ -156,7 +200,16 @@ export function CardFigure({
           strokeWidth="1.4"
           markerEnd="url(#fig-ink)"
         />
-        <text x="139" y="152" fontSize="11" fill={INK}>
+        <line
+          x1="138"
+          y1="145"
+          x2="155"
+          y2="145"
+          stroke={INK}
+          strokeWidth="0.9"
+          markerEnd="url(#vec-ink)"
+        />
+        <text x="139" y="156" fontSize="11" fill={INK}>
           mg
         </text>
 
@@ -169,34 +222,62 @@ export function CardFigure({
           strokeWidth="1.6"
           markerEnd="url(#fig-green)"
         />
-        <text x="110" y="60" fontSize="11" fill={GREEN} textAnchor="end">
+        <line
+          x1="103"
+          y1="50"
+          x2="111"
+          y2="50"
+          stroke={GREEN}
+          strokeWidth="0.9"
+          markerEnd="url(#vec-green)"
+        />
+        <text x="110" y="61" fontSize="11" fill={GREEN} textAnchor="end">
           N
         </text>
 
         <line
           x1="133.6"
           y1="101.7"
-          x2="110.4"
-          y2="113.3"
-          stroke={BLUE}
-          strokeWidth="1.6"
-          markerEnd="url(#fig-blue)"
-        />
-        <text x="105" y="121" fontSize="11" fill={BLUE} textAnchor="end">
-          a
-        </text>
-
-        <line
-          x1="138.5"
-          y1="111.5"
-          x2="154.6"
-          y2="103.5"
+          x2="155.1"
+          y2="91.0"
           stroke={RED}
           strokeWidth="1.6"
           markerEnd="url(#fig-red)"
         />
-        <text x="158" y="110" fontSize="11" fill={RED}>
+        <line
+          x1="158"
+          y1="79"
+          x2="178"
+          y2="79"
+          stroke={RED}
+          strokeWidth="0.9"
+          markerEnd="url(#vec-red)"
+        />
+        <text x="159" y="90" fontSize="11" fill={RED}>
           F<tspan fontSize="8" dy="3">тр</tspan>
+        </text>
+
+        {/* ускорение рядом с бруском, не касаясь его */}
+        <line
+          x1="104"
+          y1="104"
+          x2="82.5"
+          y2="114.7"
+          stroke={BLUE}
+          strokeWidth="1.6"
+          markerEnd="url(#fig-blue)"
+        />
+        <line
+          x1="71"
+          y1="114"
+          x2="79"
+          y2="114"
+          stroke={BLUE}
+          strokeWidth="0.9"
+          markerEnd="url(#vec-blue)"
+        />
+        <text x="78" y="125" fontSize="11" fill={BLUE} textAnchor="end">
+          a
         </text>
       </svg>
     </div>
