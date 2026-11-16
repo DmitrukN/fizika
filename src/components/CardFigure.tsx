@@ -18,7 +18,7 @@ export function CardFigure({
       className={small ? 'card__figure card__figure--small' : 'card__figure'}
     >
       <svg
-        viewBox="0 0 300 190"
+        viewBox="0 0 300 200"
         role="img"
         data-figure={id}
         aria-label="Наклонная плоскость"
@@ -126,63 +126,63 @@ export function CardFigure({
         </defs>
 
         <path
-          d="M40 170 L240 170 L240 30 Z"
+          d="M40 150 L240 150 L240 50 Z"
           fill="#eef0ec"
           stroke={INK}
           strokeWidth="1.2"
         />
         <line
           x1="8"
-          y1="170"
+          y1="150"
           x2="292"
-          y2="170"
+          y2="150"
           stroke="#b6bcb5"
           strokeWidth="1"
         />
 
         <path
-          d="M74 170 A34 34 0 0 0 67.9 150.5"
+          d="M70 150 A30 30 0 0 0 66.8 136.6"
           fill="none"
           stroke={MUTED}
           strokeWidth="0.9"
         />
-        <text x="78" y="165" fontSize="12" fill={MUTED}>
+        <text x="74" y="145" fontSize="12" fill={MUTED}>
           α
         </text>
 
         {/* оси: x вниз по склону, y от поверхности */}
         <line
           x1="70"
-          y1="110"
+          y1="105"
           x2="45.4"
-          y2="127.2"
+          y2="117.3"
           stroke={MUTED}
           strokeWidth="1"
           markerEnd="url(#fig-axis)"
         />
-        <text x="41" y="133" fontSize="10" fill={MUTED} textAnchor="end">
+        <text x="41" y="123" fontSize="10" fill={MUTED} textAnchor="end">
           x
         </text>
 
         <line
           x1="70"
-          y1="110"
-          x2="52.8"
-          y2="85.4"
+          y1="105"
+          x2="56.6"
+          y2="78.2"
           stroke={MUTED}
           strokeWidth="1"
           markerEnd="url(#fig-axis)"
         />
-        <text x="49" y="82" fontSize="10" fill={MUTED} textAnchor="end">
+        <text x="53" y="75" fontSize="10" fill={MUTED} textAnchor="end">
           y
         </text>
 
-        <g transform="translate(133.7 91.0) rotate(-35)">
+        <g transform="translate(135.1 90.2) rotate(-26.57)">
           <rect
-            x="-22"
-            y="-11"
-            width="44"
-            height="22"
+            x="-18"
+            y="-10"
+            width="36"
+            height="20"
             rx="2"
             fill="#f7f7f4"
             stroke={INK}
@@ -190,70 +190,70 @@ export function CardFigure({
           />
         </g>
 
-        {/* силы из центра: mg 56, N = mg cos α 46, Fтр 24 */}
+        {/* силы из центра: mg 80, N = mg cos α 71, Fтр 34 */}
         <line
-          x1="133.7"
-          y1="91.0"
-          x2="133.7"
-          y2="147.0"
+          x1="135.1"
+          y1="90.2"
+          x2="135.1"
+          y2="170.2"
           stroke={INK}
           strokeWidth="1.4"
           markerEnd="url(#fig-ink)"
         />
         <line
-          x1="147"
-          y1="146"
-          x2="156"
-          y2="146"
+          x1="149"
+          y1="169"
+          x2="158"
+          y2="169"
           stroke={INK}
           strokeWidth="0.9"
           markerEnd="url(#vec-ink)"
         />
-        <text x="139" y="157" fontSize="11" fill={INK}>
+        <text x="141" y="180" fontSize="11" fill={INK}>
           mg
         </text>
 
         <line
-          x1="133.7"
-          y1="91.0"
-          x2="107.3"
-          y2="53.3"
+          x1="135.1"
+          y1="90.2"
+          x2="103.4"
+          y2="26.7"
           stroke={GREEN}
           strokeWidth="1.6"
           markerEnd="url(#fig-green)"
         />
         <line
-          x1="94"
-          y1="38"
-          x2="103"
-          y2="38"
+          x1="91"
+          y1="12"
+          x2="100"
+          y2="12"
           stroke={GREEN}
           strokeWidth="0.9"
           markerEnd="url(#vec-green)"
         />
-        <text x="102" y="49" fontSize="11" fill={GREEN} textAnchor="end">
+        <text x="99" y="23" fontSize="11" fill={GREEN} textAnchor="end">
           N
         </text>
 
         <line
-          x1="133.7"
-          y1="91.0"
-          x2="153.4"
-          y2="77.2"
+          x1="135.1"
+          y1="90.2"
+          x2="165.5"
+          y2="75.0"
           stroke={RED}
           strokeWidth="1.6"
           markerEnd="url(#fig-red)"
         />
         <line
-          x1="156"
-          y1="62"
-          x2="165"
-          y2="62"
+          x1="168"
+          y1="60"
+          x2="177"
+          y2="60"
           stroke={RED}
           strokeWidth="0.9"
           markerEnd="url(#vec-red)"
         />
-        <text x="157" y="73" fontSize="11" fill={RED}>
+        <text x="169" y="71" fontSize="11" fill={RED}>
           F<tspan fontSize="8" dy="3">тр</tspan>
         </text>
 
@@ -261,22 +261,22 @@ export function CardFigure({
         <line
           x1="108"
           y1="100"
-          x2="88.3"
-          y2="113.8"
+          x2="84.1"
+          y2="111.8"
           stroke={BLUE}
           strokeWidth="1.6"
           markerEnd="url(#fig-blue)"
         />
         <line
-          x1="75"
-          y1="117"
-          x2="83"
-          y2="117"
+          x1="71"
+          y1="113"
+          x2="79"
+          y2="113"
           stroke={BLUE}
           strokeWidth="0.9"
           markerEnd="url(#vec-blue)"
         />
-        <text x="82" y="128" fontSize="11" fill={BLUE} textAnchor="end">
+        <text x="78" y="124" fontSize="11" fill={BLUE} textAnchor="end">
           a
         </text>
       </svg>
