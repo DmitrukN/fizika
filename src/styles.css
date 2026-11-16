@@ -268,7 +268,7 @@ h1 {
 .card {
   width: 100%;
   margin: auto 0;
-  padding: 26px 0;
+  padding: 24px 0;
   border-top: 1px solid var(--line-strong);
   border-bottom: 1px solid var(--line-strong);
 }
@@ -426,7 +426,7 @@ h1 {
 }
 
 .solution__step + .solution__step {
-  margin-top: 8px;
+  margin-top: 6px;
 }
 
 .solution__step--cont {

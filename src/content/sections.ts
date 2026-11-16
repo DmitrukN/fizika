@@ -1191,10 +1191,18 @@ export const SECTIONS: Section[] = [
             continuation: true,
           },
           {
+            text: 'Ускорение при скольжении',
+          },
+          {
             latex: String.raw`a=g(\sin\alpha-\mu\cos\alpha)`,
+            continuation: true,
+          },
+          {
+            text: 'Условие покоя',
           },
           {
             latex: String.raw`\operatorname{tg}\alpha\le\mu`,
+            continuation: true,
           },
         ],
         notation: [DY.N, DY.Ftr, DY.m, DY.g, DY.alpha, DY.mu],
