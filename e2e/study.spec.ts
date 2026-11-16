@@ -101,6 +101,7 @@ test('шаги вывода не вылезают за ширину карточ
     'Молекулярная физика',
     'Кинематика',
     'Динамика',
+    'Стандартные задачи',
   ]) {
     await page.goto('/');
     await page.getByRole('button', { name: new RegExp(section) }).click();
@@ -110,23 +111,24 @@ test('шаги вывода не вылезают за ширину карточ
       await page.locator('.card__hit').click();
 
       const toggle = page.getByRole('button', { name: 'Можно вывести' });
-      if ((await toggle.count()) > 0) {
-        await toggle.click();
-        const widths = await page
-          .locator('.derivation .formula')
-          .evaluateAll((nodes) =>
-            nodes.map((node) => ({
-              client: node.clientWidth,
-              scroll: node.scrollWidth,
-            })),
-          );
-        widths.forEach((item, step) => {
-          if (item.scroll > item.client + 1) {
-            overflow.push(`${title}, шаг ${step + 1}`);
-          }
-        });
-        await toggle.click();
-      }
+      const expandable = (await toggle.count()) > 0;
+      if (expandable) await toggle.click();
+
+      const widths = await page
+        .locator('.derivation .formula, .solution .formula')
+        .evaluateAll((nodes) =>
+          nodes.map((node) => ({
+            client: node.clientWidth,
+            scroll: node.scrollWidth,
+          })),
+        );
+      widths.forEach((item, step) => {
+        if (item.scroll > item.client + 1) {
+          overflow.push(`${title}, шаг ${step + 1}`);
+        }
+      });
+
+      if (expandable) await toggle.click();
 
       await page.getByRole('button', { name: 'Знаю' }).click();
     }

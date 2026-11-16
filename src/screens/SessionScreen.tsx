@@ -61,12 +61,51 @@ export function SessionScreen({
             onClick={revealed ? undefined : onReveal}
           >
             <h2 className="card__title">{noBreakDash(card.title)}</h2>
+            {!revealed && card.kind === 'task' && card.figure && (
+              <CardFigure id={card.figure} />
+            )}
             {!revealed && (
-              <p className="card__hint">Нажмите, чтобы открыть формулу</p>
+              <p className="card__hint">
+                {card.kind === 'task'
+                  ? 'Нажмите, чтобы открыть решение'
+                  : 'Нажмите, чтобы открыть формулу'}
+              </p>
             )}
           </button>
 
-          {revealed && (
+          {revealed && card.kind === 'task' && (
+            <div className="card__answer">
+              {card.figure && <CardFigure id={card.figure} small />}
+
+              <ol className="solution">
+                {card.solution?.map((step, index) => {
+                  if ('text' in step) {
+                    return (
+                      <li key={index} className="solution__step">
+                        <p className="solution__text">{step.text}</p>
+                      </li>
+                    );
+                  }
+                  return (
+                    <li
+                      key={index}
+                      className={
+                        step.continuation
+                          ? 'solution__step solution__step--cont'
+                          : 'solution__step'
+                      }
+                    >
+                      <Formula latex={step.latex} />
+                    </li>
+                  );
+                })}
+              </ol>
+
+              <NotationList items={card.notation} />
+            </div>
+          )}
+
+          {revealed && card.kind !== 'task' && (
             <div className="card__answer">
               <Formula latex={card.formula} />
 

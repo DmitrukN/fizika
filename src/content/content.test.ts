@@ -3,8 +3,8 @@ import katex from 'katex';
 import { ALL_CARDS, SECTIONS } from './sections';
 
 describe('содержимое разделов', () => {
-  it('содержит 99 карточек', () => {
-    expect(ALL_CARDS).toHaveLength(99);
+  it('содержит 87 карточек', () => {
+    expect(ALL_CARDS).toHaveLength(87);
   });
 
   it('не повторяет идентификаторы', () => {
@@ -72,6 +72,12 @@ describe('содержимое разделов', () => {
         where: `${card.id}: шаг ${index + 1}`,
         value: step,
       })),
+      ...(card.solution ?? [])
+        .filter((step): step is { latex: string } => 'latex' in step)
+        .map((step, index) => ({
+          where: `${card.id}: решение ${index + 1}`,
+          value: step.latex,
+        })),
     ]);
 
     expect(latex.length).toBeGreaterThan(0);
@@ -88,13 +94,14 @@ describe('содержимое разделов', () => {
     }
   });
 
-  it('делит карточки на 20 основ, 34 определения и 45 следствий', () => {
+  it('делит карточки на 20 основ, 34 определения, 32 следствия и 1 задачу', () => {
     const count = (kind: string) =>
       ALL_CARDS.filter((card) => card.kind === kind).length;
 
     expect(count('basis')).toBe(20);
     expect(count('definition')).toBe(34);
-    expect(count('consequence')).toBe(45);
+    expect(count('consequence')).toBe(32);
+    expect(count('task')).toBe(1);
   });
 
   it('дает каждому следствию вывод с существующими источниками', () => {
