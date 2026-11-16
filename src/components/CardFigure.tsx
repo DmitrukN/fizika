@@ -201,9 +201,9 @@ export function CardFigure({
           markerEnd="url(#fig-ink)"
         />
         <line
-          x1="138"
+          x1="147"
           y1="145"
-          x2="155"
+          x2="156"
           y2="145"
           stroke={INK}
           strokeWidth="0.9"
@@ -238,45 +238,45 @@ export function CardFigure({
         <line
           x1="133.6"
           y1="101.7"
-          x2="155.1"
-          y2="91.0"
+          x2="160.4"
+          y2="88.3"
           stroke={RED}
           strokeWidth="1.6"
           markerEnd="url(#fig-red)"
         />
         <line
-          x1="158"
-          y1="79"
-          x2="178"
-          y2="79"
+          x1="163"
+          y1="73"
+          x2="172"
+          y2="73"
           stroke={RED}
           strokeWidth="0.9"
           markerEnd="url(#vec-red)"
         />
-        <text x="159" y="90" fontSize="11" fill={RED}>
+        <text x="164" y="84" fontSize="11" fill={RED}>
           F<tspan fontSize="8" dy="3">тр</tspan>
         </text>
 
         {/* ускорение рядом с бруском, не касаясь его */}
         <line
-          x1="104"
-          y1="104"
-          x2="82.5"
-          y2="114.7"
+          x1="100"
+          y1="109"
+          x2="78.5"
+          y2="119.7"
           stroke={BLUE}
           strokeWidth="1.6"
           markerEnd="url(#fig-blue)"
         />
         <line
-          x1="71"
-          y1="114"
-          x2="79"
-          y2="114"
+          x1="67"
+          y1="122"
+          x2="75"
+          y2="122"
           stroke={BLUE}
           strokeWidth="0.9"
           markerEnd="url(#vec-blue)"
         />
-        <text x="78" y="125" fontSize="11" fill={BLUE} textAnchor="end">
+        <text x="74" y="133" fontSize="11" fill={BLUE} textAnchor="end">
           a
         </text>
       </svg>
