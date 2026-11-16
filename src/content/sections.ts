@@ -1196,14 +1196,6 @@ export const SECTIONS: Section[] = [
           {
             latex: String.raw`\operatorname{tg}\alpha\le\mu`,
           },
-          {
-            latex: String.raw`\alpha\le\operatorname{arctg}\mu`,
-            continuation: true,
-          },
-          {
-            latex: String.raw`\mu\ge\operatorname{tg}\alpha`,
-            continuation: true,
-          },
         ],
         notation: [DY.N, DY.Ftr, DY.m, DY.g, DY.alpha, DY.mu],
       },
