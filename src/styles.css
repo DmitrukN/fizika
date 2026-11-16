@@ -442,6 +442,11 @@ h1 {
   font-size: 0.95rem;
 }
 
+.solution .katex-display,
+.solution .katex-display > .katex {
+  text-align: left;
+}
+
 .solution__text {
   margin: 0;
   font-size: 14px;
