@@ -392,13 +392,13 @@ h1 {
 .card__figure svg {
   display: block;
   width: 100%;
-  max-width: 280px;
+  max-width: 338px;
   height: auto;
   margin: 0 auto;
 }
 
 .card__figure--small svg {
-  max-width: 196px;
+  max-width: 220px;
 }
 
 .solution {
