@@ -80,31 +80,33 @@ function Incline() {
 }
 
 function Elevator() {
-  const cab = (x: number) => (
-    <>
-      <line x1={x + 40} y1="18" x2={x + 40} y2="50" stroke={MUTED} strokeWidth="1.2" />
-      <rect x={x} y="50" width="80" height="100" rx="3" fill="#f7f7f4" stroke={INK} strokeWidth="1.2" />
-      <rect x={x + 22} y="106" width="36" height="32" rx="2" fill="#eef0ec" stroke={INK} strokeWidth="1" />
-      <line x1={x + 40} y1="122" x2={x + 40} y2="94" stroke={GREEN} strokeWidth="1.6" markerEnd="url(#fig-green)" />
-      <line x1={x + 40} y1="122" x2={x + 40} y2="148" stroke={INK} strokeWidth="1.4" markerEnd="url(#fig-ink)" />
-    </>
-  );
-
   return (
     <svg viewBox="0 0 300 190" role="img" aria-label="Вес в лифте">
       <Defs />
-      {cab(40)}
-      {cab(180)}
 
-      <text x="104" y="88" fontSize="11" fill={GREEN} textAnchor="end">N</text>
-      <text x="104" y="154" fontSize="11" fill={INK} textAnchor="end">mg</text>
-      <text x="244" y="88" fontSize="11" fill={GREEN} textAnchor="end">N</text>
-      <text x="244" y="154" fontSize="11" fill={INK} textAnchor="end">mg</text>
+      {/* кабина вверх: N > mg */}
+      <line x1="80" y1="18" x2="80" y2="50" stroke={MUTED} strokeWidth="1.2" />
+      <rect x="40" y="50" width="80" height="100" rx="3" fill="#f7f7f4" stroke={INK} strokeWidth="1.2" />
+      <rect x="62" y="100" width="36" height="30" rx="2" fill="#eef0ec" stroke={INK} strokeWidth="1" />
+      <line x1="80" y1="115" x2="80" y2="75" stroke={GREEN} strokeWidth="1.6" markerEnd="url(#fig-green)" />
+      <line x1="80" y1="115" x2="80" y2="145" stroke={INK} strokeWidth="1.4" markerEnd="url(#fig-ink)" />
+      <text x="76" y="78" fontSize="11" fill={GREEN} textAnchor="end">N</text>
+      <text x="76" y="143" fontSize="11" fill={INK} textAnchor="end">mg</text>
 
-      <line x1="140" y1="120" x2="140" y2="98" stroke={BLUE} strokeWidth="1.6" markerEnd="url(#fig-blue)" />
-      <text x="144" y="108" fontSize="10" fill={BLUE}>a</text>
-      <line x1="260" y1="142" x2="260" y2="164" stroke={BLUE} strokeWidth="1.6" markerEnd="url(#fig-blue)" />
-      <text x="264" y="156" fontSize="10" fill={BLUE}>a</text>
+      <line x1="28" y1="125" x2="28" y2="100" stroke={BLUE} strokeWidth="1.6" markerEnd="url(#fig-blue)" />
+      <text x="32" y="112" fontSize="10" fill={BLUE}>a</text>
+
+      {/* кабина вниз: N < mg */}
+      <line x1="220" y1="18" x2="220" y2="50" stroke={MUTED} strokeWidth="1.2" />
+      <rect x="180" y="50" width="80" height="100" rx="3" fill="#f7f7f4" stroke={INK} strokeWidth="1.2" />
+      <rect x="202" y="100" width="36" height="30" rx="2" fill="#eef0ec" stroke={INK} strokeWidth="1" />
+      <line x1="220" y1="115" x2="220" y2="97" stroke={GREEN} strokeWidth="1.6" markerEnd="url(#fig-green)" />
+      <line x1="220" y1="115" x2="220" y2="145" stroke={INK} strokeWidth="1.4" markerEnd="url(#fig-ink)" />
+      <text x="216" y="100" fontSize="11" fill={GREEN} textAnchor="end">N</text>
+      <text x="216" y="143" fontSize="11" fill={INK} textAnchor="end">mg</text>
+
+      <line x1="272" y1="105" x2="272" y2="130" stroke={BLUE} strokeWidth="1.6" markerEnd="url(#fig-blue)" />
+      <text x="276" y="122" fontSize="10" fill={BLUE}>a</text>
 
       <text x="80" y="176" fontSize="10" fill={MUTED} textAnchor="middle">вверх</text>
       <text x="220" y="176" fontSize="10" fill={MUTED} textAnchor="middle">вниз</text>
@@ -122,18 +124,20 @@ function Bridge() {
       <rect x="68" y="78" width="24" height="10" rx="2" fill="#f7f7f4" stroke={INK} strokeWidth="1.1" />
       <rect x="208" y="98" width="24" height="10" rx="2" fill="#f7f7f4" stroke={INK} strokeWidth="1.1" />
 
-      <line x1="80" y1="83" x2="80" y2="56" stroke={GREEN} strokeWidth="1.6" markerEnd="url(#fig-green)" />
-      <line x1="80" y1="83" x2="80" y2="108" stroke={INK} strokeWidth="1.4" markerEnd="url(#fig-ink)" />
-      <line x1="220" y1="103" x2="220" y2="76" stroke={GREEN} strokeWidth="1.6" markerEnd="url(#fig-green)" />
-      <line x1="220" y1="103" x2="220" y2="128" stroke={INK} strokeWidth="1.4" markerEnd="url(#fig-ink)" />
+      {/* выпуклый: N < mg */}
+      <line x1="80" y1="83" x2="80" y2="57" stroke={GREEN} strokeWidth="1.6" markerEnd="url(#fig-green)" />
+      <line x1="80" y1="83" x2="80" y2="123" stroke={INK} strokeWidth="1.4" markerEnd="url(#fig-ink)" />
+      <text x="76" y="59" fontSize="11" fill={GREEN} textAnchor="end">N</text>
+      <text x="76" y="121" fontSize="11" fill={INK} textAnchor="end">mg</text>
 
-      <text x="64" y="60" fontSize="11" fill={GREEN} textAnchor="end">N</text>
-      <text x="64" y="118" fontSize="11" fill={INK} textAnchor="end">mg</text>
-      <text x="204" y="80" fontSize="11" fill={GREEN} textAnchor="end">N</text>
-      <text x="204" y="138" fontSize="11" fill={INK} textAnchor="end">mg</text>
+      {/* вогнутый: N > mg */}
+      <line x1="220" y1="103" x2="220" y2="49" stroke={GREEN} strokeWidth="1.6" markerEnd="url(#fig-green)" />
+      <line x1="220" y1="103" x2="220" y2="143" stroke={INK} strokeWidth="1.4" markerEnd="url(#fig-ink)" />
+      <text x="216" y="51" fontSize="11" fill={GREEN} textAnchor="end">N</text>
+      <text x="216" y="141" fontSize="11" fill={INK} textAnchor="end">mg</text>
 
-      <text x="80" y="160" fontSize="10" fill={MUTED} textAnchor="middle">выпуклый</text>
-      <text x="220" y="160" fontSize="10" fill={MUTED} textAnchor="middle">вогнутый</text>
+      <text x="80" y="162" fontSize="10" fill={MUTED} textAnchor="middle">выпуклый</text>
+      <text x="220" y="162" fontSize="10" fill={MUTED} textAnchor="middle">вогнутый</text>
     </svg>
   );
 }
