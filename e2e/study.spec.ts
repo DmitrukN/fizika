@@ -106,6 +106,10 @@ test('шаги вывода не вылезают за ширину карточ
     await page.goto('/');
     await page.getByRole('button', { name: new RegExp(section) }).click();
 
+    if ((await page.locator('.card__hit').count()) === 0) {
+      await page.getByRole('button', { name: 'Повторить все' }).click();
+    }
+
     while ((await page.locator('.card__hit').count()) > 0) {
       const title = await page.locator('.card__title').innerText();
       await page.locator('.card__hit').click();

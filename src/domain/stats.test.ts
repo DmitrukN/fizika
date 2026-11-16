@@ -8,6 +8,7 @@ import {
   progressOf,
   sectionStats,
   studyDays,
+  taskUnlocked,
 } from './stats';
 import { emptyStore, type Store } from '../storage/store';
 
@@ -36,7 +37,7 @@ describe('статистика раздела', () => {
     const store = storeWith({
       amount: { ...NEW_CARD, interval: 5, due: '2026-12-01' },
     });
-    expect(dueCards(ALL_CARDS, store, '2026-11-05')).toHaveLength(86);
+    expect(dueCards(ALL_CARDS, store, '2026-11-05')).toHaveLength(85);
   });
 
   it('считает точность по всем ответам и по последней сессии', () => {
@@ -80,5 +81,21 @@ describe('статистика раздела', () => {
 
   it('для неизвестной карточки считает прогресс новым', () => {
     expect(progressOf(emptyStore(), 'нет такой')).toEqual(NEW_CARD);
+  });
+
+  it('не открывает задачу, пока опорные карточки не закреплены', () => {
+    const task = ALL_CARDS.find((card) => card.id === 'incline-plane');
+    if (!task) throw new Error('нет задачи про наклонную плоскость');
+
+    const half = storeWith({
+      'newton-second': { ...NEW_CARD, interval: 5 },
+    });
+    expect(taskUnlocked(task, half)).toBe(false);
+
+    const full = storeWith({
+      'newton-second': { ...NEW_CARD, interval: 5 },
+      'friction-sliding': { ...NEW_CARD, interval: 5 },
+    });
+    expect(taskUnlocked(task, full)).toBe(true);
   });
 });

@@ -37,7 +37,17 @@ export function sectionStats(section: Section, store: Store): SectionStats {
 }
 
 export function dueCards(cards: Card[], store: Store, day: Day): Card[] {
-  return cards.filter((card) => isDue(progressOf(store, card.id), day));
+  return cards.filter(
+    (card) =>
+      isDue(progressOf(store, card.id), day) && taskUnlocked(card, store),
+  );
+}
+
+export function taskUnlocked(card: Card, store: Store): boolean {
+  if (card.kind !== 'task') return true;
+  return (card.requires ?? []).every(
+    (id) => progressOf(store, id).interval >= 5,
+  );
 }
 
 export function accuracy(store: Store): {

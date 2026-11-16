@@ -7,7 +7,12 @@ export interface Notation {
 
 export type CardKind = 'basis' | 'definition' | 'consequence' | 'task';
 
-export type FigureId = 'incline-forces';
+export type FigureId =
+  | 'incline-forces'
+  | 'elevator'
+  | 'bridge'
+  | 'vertical-throw'
+  | 'projectile';
 
 export interface ExtraLine {
   label: string;
@@ -33,6 +38,7 @@ export interface Card {
   extra?: ExtraLine[];
   derivation?: Derivation;
   solution?: SolutionStep[];
+  requires?: string[];
 }
 
 export interface Section {
@@ -1175,6 +1181,7 @@ export const SECTIONS: Section[] = [
         title: 'Тело на наклонной плоскости',
         kind: 'task',
         figure: 'incline-forces',
+        requires: ['newton-second', 'friction-sliding'],
         formula: String.raw`\begin{aligned}N&=mg\cos\alpha\\ a&=g(\sin\alpha-\mu\cos\alpha)\end{aligned}`,
         solution: [
           { text: 'Второй закон Ньютона (проекции)' },
@@ -1206,6 +1213,165 @@ export const SECTIONS: Section[] = [
           },
         ],
         notation: [DY.N, DY.Ftr, DY.m, DY.g, DY.alpha, DY.mu],
+      },
+      {
+        id: 'elevator-weight',
+        title: 'Вес в лифте',
+        kind: 'task',
+        figure: 'elevator',
+        requires: ['newton-second', 'weight'],
+        formula: String.raw`\begin{aligned}P&=m(g+a)\\ P&=m(g-a)\end{aligned}`,
+        solution: [
+          { text: 'Второй закон Ньютона' },
+          {
+            latex: String.raw`\text{Вверх:}\quad N-mg=ma`,
+            continuation: true,
+          },
+          {
+            latex: String.raw`\text{Вниз:}\quad mg-N=ma`,
+            continuation: true,
+          },
+          { text: 'Вес' },
+          {
+            latex: String.raw`P=N`,
+            continuation: true,
+          },
+          {
+            latex: String.raw`\Rightarrow\ P=m(g+a)`,
+            continuation: true,
+          },
+          {
+            latex: String.raw`P=m(g-a)`,
+            continuation: true,
+          },
+        ],
+        notation: [DY.P, DY.m, DY.g, DY.a],
+      },
+      {
+        id: 'bridge-weight',
+        title: 'Вес на мосту',
+        kind: 'task',
+        figure: 'bridge',
+        requires: ['newton-second', 'centripetal-acceleration'],
+        formula: String.raw`\begin{aligned}P&=m\left(g-\dfrac{v^2}{R}\right)\\ P&=m\left(g+\dfrac{v^2}{R}\right)\end{aligned}`,
+        solution: [
+          { text: 'Второй закон Ньютона, ось к центру' },
+          {
+            latex: String.raw`\text{Выпуклый:}\quad mg-N=m\dfrac{v^2}{R}`,
+            continuation: true,
+          },
+          {
+            latex: String.raw`\text{Вогнутый:}\quad N-mg=m\dfrac{v^2}{R}`,
+            continuation: true,
+          },
+          { text: 'Вес' },
+          {
+            latex: String.raw`P=N`,
+            continuation: true,
+          },
+          {
+            latex: String.raw`\Rightarrow\ P=m\left(g-\dfrac{v^2}{R}\right)`,
+            continuation: true,
+          },
+          {
+            latex: String.raw`P=m\left(g+\dfrac{v^2}{R}\right)`,
+            continuation: true,
+          },
+        ],
+        notation: [DY.P, DY.m, DY.g, DY.v, DY.R],
+      },
+      {
+        id: 'vertical-throw',
+        title: 'Бросок вертикально вверх',
+        kind: 'task',
+        figure: 'vertical-throw',
+        requires: ['kinematic-projections'],
+        formula: String.raw`\begin{aligned}v_y&=v_0-gt\\ y&=v_0t-\dfrac{gt^2}{2}\end{aligned}`,
+        solution: [
+          { text: 'Ось Oy вверх, a = −g' },
+          {
+            latex: String.raw`v_y=v_0-gt`,
+            continuation: true,
+          },
+          {
+            latex: String.raw`y=v_0t-\dfrac{gt^2}{2}`,
+            continuation: true,
+          },
+          { text: 'В верхней точке' },
+          {
+            latex: String.raw`v_y=0\ \Rightarrow\ t_{\text{под}}=\dfrac{v_0}{g}`,
+            continuation: true,
+          },
+          {
+            latex: String.raw`H=\dfrac{v_0^2}{2g}`,
+            continuation: true,
+          },
+        ],
+        notation: [KI.v0, DY.g, KI.t, DY.h],
+      },
+      {
+        id: 'projectile-motion',
+        title: 'Бросок под углом к горизонту',
+        kind: 'task',
+        figure: 'projectile',
+        requires: ['kinematic-projections'],
+        formula: String.raw`\begin{aligned}x&=v_0\cos\alpha\,t\\ y&=v_0\sin\alpha\,t-\dfrac{gt^2}{2}\end{aligned}`,
+        solution: [
+          { text: 'Оси: Ox вдоль, Oy вверх' },
+          {
+            latex: String.raw`v_x=v_0\cos\alpha`,
+            continuation: true,
+          },
+          {
+            latex: String.raw`x=v_0\cos\alpha\,t`,
+            continuation: true,
+          },
+          {
+            latex: String.raw`v_y=v_0\sin\alpha-gt`,
+            continuation: true,
+          },
+          {
+            latex: String.raw`y=v_0\sin\alpha\,t-\dfrac{gt^2}{2}`,
+            continuation: true,
+          },
+        ],
+        notation: [
+          KI.v0,
+          DY.alpha,
+          DY.g,
+          KI.t,
+          n('x', 'координата, м'),
+          n('y', 'координата, м'),
+        ],
+      },
+      {
+        id: 'projectile-results',
+        title: 'Бросок под углом: время, высота, дальность',
+        kind: 'task',
+        figure: 'projectile',
+        requires: ['projectile-motion'],
+        formula: String.raw`\begin{aligned}t_{\text{под}}&=\dfrac{v_0\sin\alpha}{g}\\ H&=\dfrac{v_0^2\sin^2\alpha}{2g}\\ L&=\dfrac{v_0^2\sin 2\alpha}{g}\end{aligned}`,
+        solution: [
+          { text: 'В верхней точке v = 0' },
+          {
+            latex: String.raw`t_{\text{под}}=\dfrac{v_0\sin\alpha}{g}`,
+            continuation: true,
+          },
+          {
+            latex: String.raw`H=\dfrac{v_0^2\sin^2\alpha}{2g}`,
+            continuation: true,
+          },
+          { text: 'При y₀ = 0' },
+          {
+            latex: String.raw`L=v_0\cos\alpha\cdot 2t_{\text{под}}`,
+            continuation: true,
+          },
+          {
+            latex: String.raw`L=\dfrac{v_0^2\sin 2\alpha}{g}`,
+            continuation: true,
+          },
+        ],
+        notation: [KI.v0, DY.alpha, DY.g, KI.tRise, KI.H, KI.L],
       },
     ],
   },

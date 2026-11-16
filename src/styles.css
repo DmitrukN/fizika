@@ -268,7 +268,7 @@ h1 {
 .card {
   width: 100%;
   margin: auto 0;
-  padding: 24px 0;
+  padding: 20px 0;
   border-top: 1px solid var(--line-strong);
   border-bottom: 1px solid var(--line-strong);
 }
@@ -392,7 +392,7 @@ h1 {
 .card__figure svg {
   display: block;
   width: 100%;
-  max-width: 338px;
+  max-width: 300px;
   height: auto;
   margin: 0 auto;
 }
@@ -426,7 +426,7 @@ h1 {
 }
 
 .solution__step + .solution__step {
-  margin-top: 6px;
+  margin-top: 4px;
 }
 
 .solution__step--cont {
@@ -439,7 +439,7 @@ h1 {
 }
 
 .solution__step .formula {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
 .solution .katex-display,
@@ -464,7 +464,7 @@ h1 {
   display: grid;
   grid-template-columns: max-content 1fr;
   column-gap: 14px;
-  row-gap: 6px;
+  row-gap: 4px;
   align-items: baseline;
 }
 

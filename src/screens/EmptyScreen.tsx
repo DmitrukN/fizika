@@ -1,11 +1,13 @@
 interface EmptyScreenProps {
   sectionTitle: string;
+  hint?: string | null;
   onRepeatAll: () => void;
   onHome: () => void;
 }
 
 export function EmptyScreen({
   sectionTitle,
+  hint,
   onRepeatAll,
   onHome,
 }: EmptyScreenProps) {
@@ -17,6 +19,7 @@ export function EmptyScreen({
           В разделе «{sectionTitle}» нет созревших карточек. Можно повторить все
           подряд — интервалы от этого не сбросятся.
         </p>
+        {hint && <p className="message__text">{hint}</p>}
       </div>
 
       <div className="summary__actions">

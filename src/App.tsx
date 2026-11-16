@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from 'react';
 import {
+  cardById,
   SECTIONS,
   sectionById,
   sectionTitle,
@@ -13,7 +14,7 @@ import {
   requeueIndex,
   type Answer,
 } from './domain/scheduler';
-import { progressOf } from './domain/stats';
+import { progressOf, taskUnlocked } from './domain/stats';
 import {
   clear,
   emptyStore,
@@ -64,6 +65,21 @@ function readStore(): LoadResult {
   }
 }
 
+function lockedHint(cards: Card[], store: Store): string | null {
+  const ids = new Set<string>();
+
+  for (const card of cards) {
+    if (card.kind === 'task' && !taskUnlocked(card, store)) {
+      for (const id of card.requires ?? []) ids.add(id);
+    }
+  }
+
+  if (ids.size === 0) return null;
+
+  const titles = [...ids].map((id) => cardById(id).title).join(', ');
+  return `Задачи откроются, когда закрепите: ${titles}.`;
+}
+
 export function App() {
   const [initial] = useState(readStore);
   const [store, setStore] = useState<Store | null>(
@@ -79,6 +95,7 @@ export function App() {
   const [emptySection, setEmptySection] = useState<SectionId>(
     SECTIONS[0].id,
   );
+  const [emptyHint, setEmptyHint] = useState<string | null>(null);
   const [result, setResult] = useState<SessionRecord | null>(null);
   const [saveError, setSaveError] = useState<string | null>(null);
 
@@ -103,19 +120,22 @@ export function App() {
     const section = sectionById(sectionId);
     const due = repeatAll
       ? section.cards
-      : section.cards.filter((card) =>
-          isDue(progressOf(store, card.id), day),
+      : section.cards.filter(
+          (card) =>
+            isDue(progressOf(store, card.id), day) &&
+            taskUnlocked(card, store),
         );
 
     if (due.length === 0) {
       setEmptySection(sectionId);
+      setEmptyHint(lockedHint(section.cards, store));
       setScreen('empty');
       return;
     }
 
     setSession({
       section: sectionId,
-      queue: shuffle(due),
+      queue: sectionId === 'tasks' ? due : shuffle(due),
       revealed: false,
       startedAt: Date.now(),
       answeredIds: [],
@@ -284,6 +304,7 @@ export function App() {
       content = (
         <EmptyScreen
           sectionTitle={sectionTitle(emptySection)}
+          hint={emptyHint}
           onRepeatAll={() => startSession(emptySection, true)}
           onHome={() => setScreen('start')}
         />
